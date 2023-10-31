@@ -3,6 +3,7 @@ const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 const {
   createCategoryController,
   updateCategoryController,
+  deleteCategoryController,
 } = require("../controllers/categoryController");
 const router = express.Router();
 
@@ -22,6 +23,13 @@ router.put(
   requireSignIn,
   isAdmin,
   updateCategoryController
+);
+// DELETE CATEGORY || METHOD DELETE
+router.delete(
+  "/delete-category/:id",
+  requireSignIn,
+  isAdmin,
+  deleteCategoryController
 );
 
 module.exports = router;

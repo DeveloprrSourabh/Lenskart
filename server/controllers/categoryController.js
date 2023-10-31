@@ -68,7 +68,33 @@ exports.updateCategoryController = async (req, res) => {
     console.log(error);
     res.status(400).send({
       success: false,
-      message: "Error While Creating  category",
+      message: "Error While Updating  category",
+      error,
+    });
+  }
+};
+// Update Category
+exports.deleteCategoryController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const existsCategory = await Category.findById(id);
+    if (!existsCategory) {
+      return res.status(404).send({
+        success: false,
+        message: "No Category Found",
+      });
+    }
+    const category = await Category.findByIdAndDelete(id);
+    res.status(200).send({
+      success: true,
+      message: "Category Deleted Successfully",
+      category,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error While Deleting  category",
       error,
     });
   }
