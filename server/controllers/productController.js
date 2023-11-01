@@ -51,10 +51,36 @@ exports.createProductController = async (req, res) => {
   }
 };
 
+// Get All Products
+exports.getAllProductController = async (req, res) => {
+  try {
+    const products = await Product.find({}).populate("category");
+    return res.status(200).send({
+      success: true,
+      message: "Getting All Products",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting All Products",
+      error,
+    });
+  }
+};
+
 // Update Product
 exports.updateProductController = async (req, res) => {
   try {
     const { name, quantity, price, description, category, shipping } = req.body;
+    // Check Existing product
+    const existsProduct = await Product.findOne({ name });
+    if (existsProduct) {
+      return res
+        .status(400)
+        .send({ success: false, message: "Product Already Eixsts" });
+    }
     // Check validation
     if (!name) {
       return res.status(400).send({ Error: "Name is Required" });
@@ -83,7 +109,7 @@ exports.updateProductController = async (req, res) => {
         slug: slugify(name),
       },
       { new: true }
-    );
+    ).populate("category");
     return res.status(200).send({
       success: true,
       message: "Product Updated Successfully",
@@ -126,20 +152,26 @@ exports.deleteProductController = async (req, res) => {
   }
 };
 
-// Get All Products
-exports.getAllProductController = async (req, res) => {
+// Get Single Product
+exports.getSingleProductController = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const product = await Product.findById(req.params.id).populate("category");
+    if (!product) {
+      return res.status(400).send({
+        success: false,
+        message: "Product Not Found",
+      });
+    }
     return res.status(200).send({
       success: true,
-      message: "Getting All Products",
-      products,
+      message: "Getting Single Product",
+      product,
     });
   } catch (error) {
     console.log(error);
     return res.status(400).send({
       success: false,
-      message: "Error While Getting All Products",
+      message: "Error While Getting Single Product",
       error,
     });
   }

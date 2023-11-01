@@ -1,5 +1,6 @@
 const Category = require("../models/categoryModel");
 const slugify = require("slugify");
+
 // Create New Category
 exports.createCategoryController = async (req, res) => {
   try {
@@ -73,6 +74,7 @@ exports.updateCategoryController = async (req, res) => {
     });
   }
 };
+
 // Update Category
 exports.deleteCategoryController = async (req, res) => {
   try {
@@ -114,6 +116,32 @@ exports.getAllCategoryController = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "Error While Gtting All Category",
+      error,
+    });
+  }
+};
+
+// Get Single Category
+
+exports.getSingleCategoryController = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    if (!category) {
+      return res.status(400).send({
+        success: false,
+        message: "Category Not Found",
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: "Getting Single Category",
+      category,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting Single Category",
       error,
     });
   }
