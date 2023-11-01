@@ -5,12 +5,12 @@ exports.createCategoryController = async (req, res) => {
   try {
     const { name } = req.body;
     if (!name) {
-      res.status(400).send({ Error: "category is Required" });
+      return res.status(400).send({ Error: "category is Required" });
     }
     // Check Category
     const existsCategory = await Category.findOne({ name });
     if (existsCategory) {
-      res.status(400).send({
+      return res.status(400).send({
         success: false,
         message: "Category Already Exists",
       });
@@ -21,14 +21,14 @@ exports.createCategoryController = async (req, res) => {
       name: name,
       slug: slugify(name),
     }).save();
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Category Created Successully",
       category,
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: "Error While Creating  category",
       error,
@@ -42,11 +42,11 @@ exports.updateCategoryController = async (req, res) => {
     const { name } = req.body;
     const { id } = req.params;
     if (!name) {
-      res.status(400).send({ Error: "category is Required" });
+      return res.status(400).send({ Error: "category is Required" });
     }
     const existsCategory = await Category.findById(id);
     if (!existsCategory) {
-      res.status(404).send({
+      return res.status(404).send({
         success: false,
         message: "No Category Found",
       });
@@ -59,14 +59,14 @@ exports.updateCategoryController = async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Category Updated Successfully",
       category,
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: "Error While Updating  category",
       error,
@@ -85,16 +85,35 @@ exports.deleteCategoryController = async (req, res) => {
       });
     }
     const category = await Category.findByIdAndDelete(id);
-    res.status(200).send({
+    return res.status(200).send({
       success: true,
       message: "Category Deleted Successfully",
       category,
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    return res.status(400).send({
       success: false,
       message: "Error While Deleting  category",
+      error,
+    });
+  }
+};
+
+// Get All Category Controller
+exports.getAllCategoryController = async (req, res) => {
+  try {
+    const categories = await Category.find({});
+    return res.status(200).send({
+      succcess: true,
+      message: "Get all Category Successfully",
+      categories,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Gtting All Category",
       error,
     });
   }

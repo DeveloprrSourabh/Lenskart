@@ -11,7 +11,12 @@ exports.requireSignIn = async (req, res, next) => {
     req.user = decode;
     next();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    return res.status(401).send({
+      success: false,
+      message: "Jwt Must Be Provided",
+      error,
+    });
   }
 };
 
@@ -20,7 +25,7 @@ exports.isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
     if (user.role !== 1) {
-      res.status(401).send({
+      return res.status(401).send({
         success: false,
         message: "Unauthorized Access",
       });

@@ -4,6 +4,7 @@ const {
   createCategoryController,
   updateCategoryController,
   deleteCategoryController,
+  getAllCategoryController,
 } = require("../controllers/categoryController");
 const router = express.Router();
 
@@ -32,4 +33,6 @@ router.delete(
   deleteCategoryController
 );
 
+// GET ALL CATEGORY || METHOD GET
+router.get("/get-category", getAllCategoryController);
 module.exports = router;
