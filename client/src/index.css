@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800;1,900&display=swap");
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body,
+html,
+* {
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  font-family: "Libre Baskerville", serif;
+  font-family: "Libre Franklin", sans-serif;
+}
+
+/************** Header Start **************/
+.header_item a {
+  padding: 0px 0.5vw;
+  color: #000042;
+  border-right: 1px solid;
+  font-size: 11px;
+}
+#masthead {
+  padding: 0px 25px;
+  margin: 4px 0px 0px;
+}
+.header_contact a {
+  padding: 0px 0.5vw;
+  color: #000042;
+  font-size: 11px;
+}
+.number-logo img {
+  height: 33px;
+  width: 125px;
+}
+input.search_input {
+  background: rgb(255, 255, 255);
+  width: 100%;
+  padding: 4px 7px;
+  margin: 0px;
+  position: relative;
+  z-index: 2001;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 66, 0.5);
+  border-radius: 5px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: rgba(0, 0, 66, 0.5);
+  outline: none;
+}
+.other-menu img {
+  width: 20px;
+  margin: 0px 5px;
+  height: 20px;
+}
+.other-menu a {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: #000042;
+}
+.header_ul .header_item:first-child a {
+  padding-left: 0px;
+}
