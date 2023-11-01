@@ -48,6 +48,7 @@ const Header = () => {
                     <img src="./Images/main_logo.svg" alt="" />
                   </Link>
                 </div>
+
                 <div className="d-flex align-items-center number-logo">
                   <img src="./Images/lsNum.jpg" alt="" />
                 </div>
