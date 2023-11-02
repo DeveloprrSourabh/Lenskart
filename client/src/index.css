@@ -68,3 +68,62 @@ input.search_input {
 .header_ul .header_item:first-child a {
   padding-left: 0px;
 }
+/**************  Header End ************** /
+
+/**************  Footer Start **************/
+.first-sec {
+  background-color: rgb(0, 0, 66);
+  padding: 20px 40px;
+  color: #fff;
+}
+.second-sec {
+  padding: 0px 55px 35px;
+  background-color: rgb(0, 0, 66);
+  color: #fff;
+}
+h2.footer-menu-heading {
+  line-height: 25px;
+  font-size: 20px;
+  font-weight: 300;
+  margin: 20px 0px 10px;
+}
+li.footer_menu-list a {
+  color: #fff;
+  padding-inline-end: 0px;
+  font-family: inherit;
+  font-size: 12px;
+}
+li.footer_menu-list {
+  margin: 15px 0px;
+}
+.store-desc {
+  font-size: 15px;
+  text-align: center;
+  margin-top: 30px;
+}
+.footer-line {
+  border-bottom: 1px solid #fff;
+  margin: 0px 55px;
+}
+.last-second_ul a {
+  font-size: 25px;
+}
+.third-sec {
+  padding: 20px 55px;
+  background-color: rgb(0, 0, 66);
+}
+.first-sec h1 {
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.3px;
+  color: rgb(244, 244, 244);
+  padding-bottom: 15px !important;
+}
+.footer-para {
+  line-height: 20px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  color: rgb(252, 252, 252);
+}
+/**************  Footer Complete **************/
