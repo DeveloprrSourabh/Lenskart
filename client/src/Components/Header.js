@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Register from "../Pages/Auth/Register";
 import Login from "../Pages/Auth/Login";
+import Forgot from "../Pages/Auth/Forgot";
 import { useAuth } from "../context/auth";
+import toast from "react-hot-toast";
 const Header = () => {
   const [show, setShow] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
   const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
   return (
     <>
       <div>
@@ -96,7 +100,19 @@ const Header = () => {
                             </li>
 
                             <li>
-                              <Link className="header-user_list" to="">
+                              <Link
+                                onClick={() => {
+                                  localStorage.removeItem("auth");
+                                  setAuth({
+                                    user: null,
+                                    token: "",
+                                  });
+                                  toast.success("Logout Successfully");
+                                  navigate("/");
+                                }}
+                                className="header-user_list"
+                                to=""
+                              >
                                 Logout
                               </Link>
                             </li>
@@ -147,6 +163,8 @@ const Header = () => {
           setShow={setShow}
           showLogin={showLogin}
           setShowLogin={setShowLogin}
+          showForgot={showForgot}
+          setShowForgot={setShowForgot}
         />
       ) : (
         ""
@@ -157,6 +175,20 @@ const Header = () => {
           setShowLogin={setShowLogin}
           show={show}
           setShow={setShow}
+          showForgot={showForgot}
+          setShowForgot={setShowForgot}
+        />
+      ) : (
+        ""
+      )}
+      {showForgot ? (
+        <Forgot
+          showLogin={showLogin}
+          setShowLogin={setShowLogin}
+          show={show}
+          setShow={setShow}
+          showForgot={showForgot}
+          setShowForgot={setShowForgot}
         />
       ) : (
         ""
