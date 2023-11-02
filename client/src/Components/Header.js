@@ -88,14 +88,13 @@ const Header = () => {
 
                           <ul className="header-user_ul">
                             <li>
-                              <Link className="header-user_list" to="">
-                                My Orders
-                              </Link>
-                            </li>
-
-                            <li>
-                              <Link className="header-user_list" to="">
-                                Account Information
+                              <Link
+                                className="header-user_list"
+                                to={`/dashboard/${
+                                  auth?.user?.role === 1 ? "admin" : "user"
+                                }`}
+                              >
+                                Dashboard
                               </Link>
                             </li>
 
