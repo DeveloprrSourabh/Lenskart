@@ -9,9 +9,12 @@ ul {
   padding: 0;
   margin: 0;
 }
-body,
-html,
 * {
+  padding: 0;
+  margin: 0;
+}
+body,
+html {
   overflow-x: hidden;
   padding: 0;
   margin: 0;
@@ -20,6 +23,19 @@ html,
 }
 
 /************** Header Start **************/
+ul.header-user_ul {
+  display: none;
+  position: absolute;
+  width: 170px;
+  top: 25px;
+  left: -38px;
+  background: rgb(255, 255, 255);
+  z-index: 21;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
 .header_item a {
   padding: 0px 0.5vw;
   color: #000042;
@@ -36,7 +52,6 @@ html,
   font-size: 11px;
 }
 .number-logo img {
-  height: 33px;
   width: 125px;
 }
 input.search_input {
@@ -57,7 +72,6 @@ input.search_input {
 .other-menu img {
   width: 20px;
   margin: 0px 5px;
-  height: 20px;
 }
 .other-menu a {
   font-size: 14px;
@@ -67,6 +81,25 @@ input.search_input {
 }
 .header_ul .header_item:first-child a {
   padding-left: 0px;
+}
+a.header-user_list {
+  display: block;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: #000042;
+  text-decoration: none;
+}
+a.header-user_list:hover {
+  background-color: rgb(250, 250, 250);
+}
+.header_user_rotate {
+  transform: none;
+}
+
+.header-user:hover .header-user_ul {
+  display: block;
 }
 /**************  Header End ************** /
 
@@ -127,3 +160,95 @@ li.footer_menu-list {
   color: rgb(252, 252, 252);
 }
 /**************  Footer Complete **************/
+
+/**************  Register & Login Form **************/
+.form-cancel {
+  cursor: pointer;
+}
+h2.create-account {
+  font-size: 20px;
+  color: #333368;
+  line-height: 24px;
+}
+.register-input input {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  padding-right: 20px;
+  background: rgb(255, 255, 255);
+}
+div#register-form {
+  position: fixed;
+  top: 25%;
+  right: 50%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px 48px 15px;
+  width: 40%;
+  left: 30%;
+  z-index: 999999;
+}
+
+.register-input {
+  padding: 5px 6px;
+  border-radius: 10px;
+  margin: 15px 0;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(226, 226, 238);
+  box-shadow: rgba(16, 24, 40, 0.05) 0px 1px 2px;
+}
+.register-btn {
+  border-radius: 24px;
+  padding: 12px;
+  font-size: 12px;
+  border: 1px solid transparent;
+  width: 100%;
+  text-align: center;
+  background-color: #11daac;
+  color: rgb(0, 0, 66);
+  margin-bottom: 10px;
+}
+.have-account {
+  text-align: center;
+}
+.have-account a {
+  font-size: 11px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-decoration-line: underline;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #000042;
+  cursor: pointer;
+  padding: 0px 4px;
+  font-weight: 600;
+}
+.have-account span {
+  font-size: 11px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-decoration-line: underline;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #000042;
+  cursor: pointer;
+  padding: 0px 3px;
+}
+.formShow {
+  transition: all 0.5s;
+}
+div#root.formShow:before {
+  content: "";
+  background: #000;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0.3;
+}
+/**************  Register & Login Form **************/

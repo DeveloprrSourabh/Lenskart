@@ -1,12 +1,14 @@
 import React from "react";
 import Header from "./Header";
+import toast, { Toaster } from "react-hot-toast";
 import Footer from "./Footer";
 
-const Layout = ({ props }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      {props}
+      <Toaster />
+      {children}
       <Footer />
     </>
   );
