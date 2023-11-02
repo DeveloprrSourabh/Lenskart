@@ -87,7 +87,7 @@ exports.userLoginController = async (req, res) => {
     }
 
     //Authentication Token
-    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
     return res.status(200).send({
       success: true,
@@ -97,6 +97,7 @@ exports.userLoginController = async (req, res) => {
         email: user.email,
         password: user.password,
         address: user.address,
+        role: user.role,
       },
       token,
     });
@@ -158,6 +159,56 @@ exports.userForgotPasswordController = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "Error while Forget Password",
+      error,
+    });
+  }
+};
+
+// Update Profile
+exports.userUpdateController = async (req, res) => {
+  try {
+    const { name, email, address, password } = req.body;
+    if (!name) {
+      return res.status(400).send({ message: "Name is Required" });
+    }
+    if (!email) {
+      return res.status(400).send({ message: "Email is Required" });
+    }
+    if (!password) {
+      return res.status(400).send({ message: "Password is Required" });
+    }
+    if (!address) {
+      return res.status(400).send({ message: "Address is Required" });
+    }
+
+    // Check User
+    let user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(400).send({
+        success: false,
+        message: "No User Found",
+      });
+    }
+    // Hash Password
+    const secPass = await hashPassword(password);
+    user = await User.findByIdAndUpdate(
+      user._id,
+      {
+        ...req.body,
+        password: secPass,
+      },
+      { new: true }
+    );
+    return res.status(200).send({
+      success: true,
+      message: "Profile Updated Succssfully",
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Updating User PRofile",
       error,
     });
   }

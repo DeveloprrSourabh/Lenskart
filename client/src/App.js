@@ -5,6 +5,7 @@ import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Home from "./Pages/Home";
 import { Route, Routes } from "react-router-dom";
 import UserDashboard from "./Pages/User/UserDashboard";
+import Profile from "./Pages/Admin/Profile";
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/profile" element={<Profile />} />
         </Route>
         {/* User Routes */}
         <Route path="/dashboard" element={<Private />}>
           <Route path="user" element={<UserDashboard />} />
+          <Route path="profile" element={<UserDashboard />} />
         </Route>
       </Routes>
     </>

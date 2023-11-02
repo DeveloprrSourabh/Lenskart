@@ -7,6 +7,7 @@ const AdminRoute = () => {
   const [ok, setOk] = useState(false);
 
   useEffect(() => {
+    console.log(auth);
     const authCheck = async () => {
       const res = await fetch(`${host}/api/v1/auth/admin-auth`, {
         method: "GET",

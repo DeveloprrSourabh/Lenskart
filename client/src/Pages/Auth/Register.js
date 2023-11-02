@@ -31,6 +31,9 @@ const Register = ({ show, setShow, setShowLogin }) => {
       const data = await res.json();
       if (data.success) {
         toast.success("User Register Successfully");
+        setShow(false);
+        const body = document.getElementById("root");
+        body.classList.remove("formShow");
       } else {
         toast.error("User Not Register");
       }

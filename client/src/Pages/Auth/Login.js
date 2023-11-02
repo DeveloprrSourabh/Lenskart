@@ -32,8 +32,8 @@ const Login = ({ showLogin, setShowForgot, setShowLogin, setShow }) => {
         toast.success(data.message);
         setAuth({
           ...auth,
-          user: data.user,
-          token: data.user,
+          user: data?.user,
+          token: data?.token,
         });
         localStorage.setItem("auth", JSON.stringify(data));
         setTimeout(() => {

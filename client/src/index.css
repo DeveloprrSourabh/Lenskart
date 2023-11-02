@@ -251,4 +251,104 @@ div#root.formShow:before {
   z-index: 9999;
   opacity: 0.3;
 }
-/**************  Register & Login Form **************/
+/**************  Register & Login Form End **************/
+
+/**************  Admin & User Dashboard  Start **************/
+.my-account-wrapper {
+  min-height: 580px;
+  max-width: 1188px;
+  margin: 10px auto 0;
+}
+.my-account-wrapper .my-ac-list {
+  margin: 0;
+  padding: 0;
+}
+.my-account-wrapper .my-ac-list li {
+  margin: 0;
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  position: relative;
+}
+.my-account-wrapper .my-ac-list li a {
+  font-size: 12px;
+  letter-spacing: 1.3px;
+  text-shadow: none;
+  text-transform: uppercase;
+  text-decoration-line: none;
+  color: #333;
+  padding: 15px;
+  display: block;
+  background: #f7f5f5;
+  line-height: normal;
+  border-bottom: 1px solid #fff;
+}
+.no-padding {
+  padding: 0 !important;
+}
+.account-dashboard {
+  letter-spacing: 1px;
+}
+.order-list {
+  padding-top: 1px;
+}
+.my-account-wrapper .my-ac-list li a.active,
+.my-account-wrapper .my-ac-list li a:hover {
+  background: #3bb3a9;
+  color: #fff;
+}
+h1.edit-heading {
+  color: #333;
+  font-size: 30px;
+  margin: 20px 0 10px;
+}
+.edit-subheading {
+  color: #333;
+  font-size: 24px;
+  margin: 20px 0 10px;
+}
+.edit-input label {
+  font-size: 13px;
+  color: #333333;
+  font-weight: 600;
+}
+.edit-input input {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  outline: none;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.edit-input {
+  margin: 10px 0 5px;
+}
+button.edit-form-btn {
+  color: #fff;
+  background-color: #f18132;
+  border-color: #ef721a;
+  font-size: 14px;
+  padding: 12px 2px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  outline: none;
+  width: 50%;
+  border: none;
+}
+.edit-form-btn:hover {
+  background-color: #e1660f;
+  border-color: #bf570d;
+  color: #fff;
+}
+.edit-btn {
+  margin-top: 20px;
+  border-top: 1px dashed rgb(204, 204, 204);
+  padding-top: 20px;
+}
+/**************  Admin & User Dashboard  End **************/

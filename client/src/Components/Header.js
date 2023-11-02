@@ -11,6 +11,18 @@ const Header = () => {
   const [showForgot, setShowForgot] = useState(false);
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    toast.success("Logout Successfully");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  };
   return (
     <>
       <div>
@@ -56,12 +68,12 @@ const Header = () => {
                 <li className="col-md-4 seond_head_list d-flex">
                   <div className="main-logo">
                     <Link to={"/"}>
-                      <img src="./Images/main_logo.svg" alt="" />
+                      <img src="../Images/main_logo.svg" alt="" />
                     </Link>
                   </div>
 
                   <div className="d-flex align-items-center number-logo">
-                    <img src="./Images/lsNum.jpg" alt="" />
+                    <img src="../Images/lsNum.jpg" alt="" />
                   </div>
                 </li>
                 <li className="col-md-4 seond_head_list">
@@ -100,15 +112,7 @@ const Header = () => {
 
                             <li>
                               <Link
-                                onClick={() => {
-                                  localStorage.removeItem("auth");
-                                  setAuth({
-                                    user: null,
-                                    token: "",
-                                  });
-                                  toast.success("Logout Successfully");
-                                  navigate("/");
-                                }}
+                                onClick={handleLogout}
                                 className="header-user_list"
                                 to=""
                               >
