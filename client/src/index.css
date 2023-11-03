@@ -405,6 +405,7 @@ span.edit-cat i {
 .all-categories {
   height: 70vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
 }
 button.cat-update-btn {
@@ -438,3 +439,73 @@ button.cat-update-btn {
   visibility: hidden;
 }
 /**************  Admin & User Dashboard  End **************/
+
+/**************  Product Start **************/
+.product-img {
+  padding-top: 20px;
+}
+.product-details {
+  padding: 10px;
+}
+.stars {
+  font-size: 14px;
+  margin-top: 10px;
+  background: #f5f5ff;
+  border-radius: 40px;
+  padding: 5px 15px;
+  width: fit-content;
+}
+.star {
+  color: #000042;
+  font-size: 15px;
+}
+.review {
+  color: #66668e;
+  font-size: 15px;
+}
+.stars i {
+  color: #00bac6;
+  font-size: 14px;
+}
+.company {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: 500;
+  color: #333333;
+  text-transform: uppercase;
+}
+.quantity {
+  color: #333368;
+  font-weight: 500;
+  font-size: 13px;
+}
+.price {
+  color: #000042;
+  font-weight: bold;
+  font-size: 15px;
+}
+.main-product {
+  margin: 10px 0px;
+  border: 1px solid #ebebf0;
+  transition: all 0.2s;
+  border-radius: 8px;
+  margin: 0px 11px;
+  overflow: hidden;
+}
+.main-product:hover {
+  box-shadow: rgba(0, 0, 0, 0.11) 0px 3px 16px 0px;
+}
+.last-item {
+  background: linear-gradient(
+    90deg,
+    rgb(247, 241, 222) 0%,
+    rgba(247, 241, 222, 0) 100%
+  );
+  padding: 10px 15px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  color: #b59a50;
+  font-size: 12px;
+  font-weight: 500;
+}
+/**************  Product End **************/

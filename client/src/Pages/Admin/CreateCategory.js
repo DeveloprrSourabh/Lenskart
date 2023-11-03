@@ -163,7 +163,7 @@ const CreateCategory = () => {
                       }`}
                     >
                       <div className="cat-name">
-                        <h2>{c.name}</h2>
+                        <h2>{c.name.substring(0, 20)}...</h2>
                         <p className="cat-time">
                           Created By : {auth?.user?.name}
                         </p>

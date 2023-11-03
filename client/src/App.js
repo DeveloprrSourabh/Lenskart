@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import UserDashboard from "./Pages/User/UserDashboard";
 import Profile from "./Pages/Admin/Profile";
 import CreateCategory from "./Pages/Admin/CreateCategory";
+import CreateProduct from "./Pages/Admin/CreateProduct";
+import Products from "./Pages/Admin/Products";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/profile" element={<Profile />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
+          <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/products" element={<Products />} />
         </Route>
         {/* User Routes */}
         <Route path="/dashboard" element={<Private />}>

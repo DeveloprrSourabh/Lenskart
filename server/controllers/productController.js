@@ -3,8 +3,7 @@ const slugify = require("slugify");
 // Create product
 exports.createProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, quantity, shipping, category } =
-      req.body;
+    const { name, slug, description, price, quantity, shipping } = req.body;
 
     // Check Existing product
     const existsProduct = await Product.findOne({ name });
@@ -33,7 +32,6 @@ exports.createProductController = async (req, res) => {
       description,
       price,
       quantity,
-      category,
       slug: slugify(name),
     }).save();
     return res.status(201).send({
@@ -54,7 +52,7 @@ exports.createProductController = async (req, res) => {
 // Get All Products
 exports.getAllProductController = async (req, res) => {
   try {
-    const products = await Product.find({}).populate("category");
+    const products = await Product.find({});
     return res.status(200).send({
       success: true,
       message: "Getting All Products",
@@ -109,7 +107,7 @@ exports.updateProductController = async (req, res) => {
         slug: slugify(name),
       },
       { new: true }
-    ).populate("category");
+    );
     return res.status(200).send({
       success: true,
       message: "Product Updated Successfully",
