@@ -9,19 +9,19 @@ exports.userRegisterController = async (req, res) => {
   try {
     const { name, email, password, answer, address } = req.body;
     if (!name) {
-      return res.send({ error: "Name is Required" });
+      return res.send({ message: "Name is Required" });
     }
     if (!email) {
-      return res.send({ error: "Email is Required" });
+      return res.send({ message: "Email is Required" });
     }
     if (!password) {
-      return res.send({ error: "Password is Required" });
+      return res.send({ message: "Password is Required" });
     }
     if (!answer) {
-      return res.send({ error: "Answer is Required" });
+      return res.send({ message: "Answer is Required" });
     }
     if (!address) {
-      return res.send({ error: "Address is Required" });
+      return res.send({ message: "Address is Required" });
     }
     // check user exists or not
     const existUser = await User.findOne({ email });
@@ -62,10 +62,10 @@ exports.userLoginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email) {
-      return res.send({ error: "Email is Required" });
+      return res.send({ message: "Email is Required" });
     }
     if (!password) {
-      return res.send({ error: "Password is Required" });
+      return res.send({ message: "Password is Required" });
     }
     // Check User
     const user = await User.findOne({ email });
@@ -116,13 +116,13 @@ exports.userForgotPasswordController = async (req, res) => {
     const { email, answer, newPassword } = req.body;
     // Check Validation
     if (!email) {
-      return res.status(400).send({ Error: "Email is Required" });
+      return res.status(400).send({ message: "Email is Required" });
     }
     if (!answer) {
-      return res.status(400).send({ Error: "Answer is Required" });
+      return res.status(400).send({ message: "Answer is Required" });
     }
     if (!newPassword) {
-      return res.status(400).send({ Error: "New Password is Required" });
+      return res.status(400).send({ message: "New Password is Required" });
     }
 
     // Check User

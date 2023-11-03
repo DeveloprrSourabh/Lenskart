@@ -40,6 +40,9 @@ html {
 }
 
 /************** Header Start **************/
+.header-user {
+  z-index: 99999;
+}
 ul.header-user_ul {
   display: none;
   position: absolute;
@@ -188,13 +191,13 @@ h2.create-account {
   line-height: 24px;
 }
 .register-input input {
+  padding: 5px 6px;
+  border-radius: 10px;
   width: 100%;
-  height: 100%;
-  font-size: 12px;
-  border: none;
-  outline: none;
-  padding-right: 20px;
   background: rgb(255, 255, 255);
+  border: 1px solid rgb(226, 226, 238);
+  box-shadow: rgba(16, 24, 40, 0.05) 0px 1px 2px;
+  outline: none;
 }
 div#register-form {
   position: fixed;
@@ -206,16 +209,11 @@ div#register-form {
   width: 40%;
   left: 30%;
   z-index: 999999;
+  font-size: 14px;
 }
 
 .register-input {
-  padding: 5px 6px;
-  border-radius: 10px;
-  margin: 15px 0;
-  width: 100%;
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(226, 226, 238);
-  box-shadow: rgba(16, 24, 40, 0.05) 0px 1px 2px;
+  margin: 15px 0px;
 }
 .register-btn {
   border-radius: 24px;
@@ -347,11 +345,26 @@ h1.edit-heading {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.edit-input select {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  outline: none;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 .edit-input {
   margin: 10px 0 5px;
 }
-button.edit-form-btn {
+.edit-form-btn {
   color: #fff;
+  cursor: pointer;
   background-color: #f18132;
   border-color: #ef721a;
   font-size: 14px;
@@ -404,7 +417,6 @@ span.edit-cat i {
 }
 .all-categories {
   height: 70vh;
-  overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
 }

@@ -3,7 +3,8 @@ const slugify = require("slugify");
 // Create product
 exports.createProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, quantity, shipping } = req.body;
+    const { name, slug, description, price, quantity, shipping, category } =
+      req.body;
 
     // Check Existing product
     const existsProduct = await Product.findOne({ name });
@@ -14,17 +15,20 @@ exports.createProductController = async (req, res) => {
     }
     // Check Validation
     if (!name) {
-      return res.status(400).send({ Error: "Name Is Required" });
+      return res.status(400).send({ message: "Name Is Required" });
+    }
+    if (category === "65450882d722235a28fsssss") {
+      return res.status(400).send({ message: "Category Is Required" });
     }
 
     if (!description) {
-      return res.status(400).send({ Error: "Description Is Required" });
+      return res.status(400).send({ message: "Description Is Required" });
     }
     if (!price) {
-      return res.status(400).send({ Error: "Price Is Required" });
+      return res.status(400).send({ message: "Price Is Required" });
     }
     if (!quantity) {
-      return res.status(400).send({ Error: "Quantity Is Required" });
+      return res.status(400).send({ message: "Quantity Is Required" });
     }
 
     const product = await new Product({
@@ -32,6 +36,8 @@ exports.createProductController = async (req, res) => {
       description,
       price,
       quantity,
+      category,
+      shipping,
       slug: slugify(name),
     }).save();
     return res.status(201).send({
@@ -73,24 +79,24 @@ exports.updateProductController = async (req, res) => {
   try {
     const { name, quantity, price, description, category, shipping } = req.body;
     // Check Existing product
-    const existsProduct = await Product.findOne({ name });
-    if (existsProduct) {
-      return res
-        .status(400)
-        .send({ success: false, message: "Product Already Eixsts" });
-    }
+    // const existsProduct = await Product.findOne({ name });
+    // if (existsProduct) {
+    //   return res
+    //     .status(400)
+    //     .send({ success: false, message: "Product Already Eixsts" });
+    // }
     // Check validation
     if (!name) {
-      return res.status(400).send({ Error: "Name is Required" });
+      return res.status(400).send({ message: "Name is Required" });
     }
     if (!quantity) {
-      return res.status(400).send({ Error: "Quantity is Required" });
+      return res.status(400).send({ message: "Quantity is Required" });
     }
     if (!price) {
-      return res.status(400).send({ Error: "Price is Required" });
+      return res.status(400).send({ message: "Price is Required" });
     }
     if (!description) {
-      return res.status(400).send({ Error: "Price is Required" });
+      return res.status(400).send({ message: "Price is Required" });
     }
 
     let product = await Product.findOne({ _id: req.params.id });
@@ -153,7 +159,7 @@ exports.deleteProductController = async (req, res) => {
 // Get Single Product
 exports.getSingleProductController = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id).populate("category");
+    const product = await Product.findOne({ slug: req.params.slug });
     if (!product) {
       return res.status(400).send({
         success: false,

@@ -8,6 +8,7 @@ import useCategory from "../../hooks/useCategory";
 const host = "http://localhost:8080";
 
 const CreateProduct = () => {
+  const categories = useCategory();
   const [auth, setAuth] = useAuth();
   const [product, setProduct] = useState({
     name: "",
@@ -37,6 +38,12 @@ const CreateProduct = () => {
       const data = await res.json();
       if (data.success) {
         toast.success(data.message);
+        setProduct({
+          name: "",
+          description: "",
+          quantity: "",
+          price: "",
+        });
       } else {
         toast.error(data.message);
       }
@@ -92,6 +99,25 @@ const CreateProduct = () => {
                       type="number"
                       value={product.quantity}
                     />
+                  </div>
+                  <div className="col-sm-6 edit-input">
+                    <label>Product Category*</label>
+                    <select onChange={onChange} name="category">
+                      <option value={"65450882d722235a28fsssss"}>
+                        Choose Category
+                      </option>
+                      {categories?.map((c) => (
+                        <option value={c._id}>{c.name}sdsds</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-sm-6 edit-input">
+                    <label>Product Shipping*</label>
+                    <select onChange={onChange} name="shipping">
+                      <option>Shipping</option>
+                      <option value={0}>No</option>
+                      <option value={1}>Yes</option>
+                    </select>
                   </div>
                 </div>
                 <div className="edit-btn col-sm-12">

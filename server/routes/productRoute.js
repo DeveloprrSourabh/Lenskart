@@ -35,6 +35,6 @@ router.delete(
 router.get("/get-products/", getAllProductController);
 
 // GET SINGLE PRODUCT || METHOD GET
-router.get("/get-product/:id", getSingleProductController);
+router.get("/get-product/:slug", getSingleProductController);
 
 module.exports = router;

@@ -6,7 +6,7 @@ exports.createCategoryController = async (req, res) => {
   try {
     const { name } = req.body;
     if (!name) {
-      return res.status(400).send({ Error: "category is Required" });
+      return res.status(400).send({ message: "category is Required" });
     }
     // Check Category
     const existsCategory = await Category.findOne({ name });
@@ -43,7 +43,7 @@ exports.updateCategoryController = async (req, res) => {
     const { name } = req.body;
     const { id } = req.params;
     if (!name) {
-      return res.status(400).send({ Error: "category is Required" });
+      return res.status(400).send({ message: "category is Required" });
     }
     const existsCategory = await Category.findById(id);
     if (!existsCategory) {

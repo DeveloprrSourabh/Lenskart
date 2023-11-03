@@ -39,12 +39,15 @@ const Products = () => {
             <div className="update-profile">
               <h1 className="edit-heading">Products</h1>
               <h2 className="edit-subheading">All Products</h2>
-              <div className="all-products row">
+              <div className="all-products mb-4 row">
                 {products &&
                   products.map((p) => {
                     return (
                       <div key={p._id} className=" col-sm-4 p-0">
-                        <Link className="d-block  main-product">
+                        <Link
+                          to={`/dashboard/admin/edit-product/${p.slug}`}
+                          className="d-block mb-4 main-product"
+                        >
                           <div className="product-img">
                             <img
                               className="w-100"

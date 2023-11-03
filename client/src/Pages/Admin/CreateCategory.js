@@ -115,6 +115,7 @@ const CreateCategory = () => {
       const data = await res.json();
       if (data.success) {
         toast.success(data.message);
+        console.log(newCategory);
         getAllcategory();
       } else {
         toast.success(data.message);
@@ -151,7 +152,7 @@ const CreateCategory = () => {
             </div>
           </div>
           <div className="col-sm-4">
-            <div className="all-categories " id="myScroll">
+            <div className="all-categories" id="myScroll">
               {categories.map((c) => {
                 return (
                   <>
@@ -184,6 +185,9 @@ const CreateCategory = () => {
                         <span
                           onClick={() => {
                             setEditForm(c.name);
+                            setNewCategory({
+                              name: "",
+                            });
                           }}
                           className="edit-cat mx-2"
                         >
