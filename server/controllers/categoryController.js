@@ -107,7 +107,7 @@ exports.getAllCategoryController = async (req, res) => {
   try {
     const categories = await Category.find({});
     return res.status(200).send({
-      succcess: true,
+      success: true,
       message: "Get all Category Successfully",
       categories,
     });

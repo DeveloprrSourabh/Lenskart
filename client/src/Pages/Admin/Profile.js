@@ -36,7 +36,7 @@ const Profile = () => {
       const data = await res.json();
       if (data.success) {
         toast.success(data.message);
-        let ls = localStorage.setItem("auth");
+        let ls = localStorage.getItem("auth");
         ls = JSON.parse(ls);
         ls.user = data.user;
         localStorage.setItem("auth", JSON.stringify(ls));

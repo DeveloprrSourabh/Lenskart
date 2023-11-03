@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import { Route, Routes } from "react-router-dom";
 import UserDashboard from "./Pages/User/UserDashboard";
 import Profile from "./Pages/Admin/Profile";
+import CreateCategory from "./Pages/Admin/CreateCategory";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/profile" element={<Profile />} />
+          <Route path="admin/create-category" element={<CreateCategory />} />
         </Route>
         {/* User Routes */}
         <Route path="/dashboard" element={<Private />}>

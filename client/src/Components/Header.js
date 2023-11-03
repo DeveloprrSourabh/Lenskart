@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Register from "../Pages/Auth/Register";
 import Login from "../Pages/Auth/Login";
 import Forgot from "../Pages/Auth/Forgot";
@@ -11,6 +11,7 @@ const Header = () => {
   const [showForgot, setShowForgot] = useState(false);
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("auth");
     setAuth({
@@ -68,12 +69,12 @@ const Header = () => {
                 <li className="col-md-4 seond_head_list d-flex">
                   <div className="main-logo">
                     <Link to={"/"}>
-                      <img src="../Images/main_logo.svg" alt="" />
+                      <img src="/Images/main_logo.svg" alt="" />
                     </Link>
                   </div>
 
                   <div className="d-flex align-items-center number-logo">
-                    <img src="../Images/lsNum.jpg" alt="" />
+                    <img src="/Images/lsNum.jpg" alt="" />
                   </div>
                 </li>
                 <li className="col-md-4 seond_head_list">
@@ -104,7 +105,7 @@ const Header = () => {
                                 className="header-user_list"
                                 to={`/dashboard/${
                                   auth?.user?.role === 1 ? "admin" : "user"
-                                }`}
+                                }/profile`}
                               >
                                 Dashboard
                               </Link>
