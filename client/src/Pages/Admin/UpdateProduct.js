@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const host = "http://localhost:8080";
 
 const UpdateProduct = () => {
+  const categories = useCategory();
   const params = useParams();
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
@@ -17,6 +18,7 @@ const UpdateProduct = () => {
     description: "",
     quantity: "",
     price: "",
+    category: "",
   });
 
   const onChange = (e) => {
@@ -144,6 +146,17 @@ const UpdateProduct = () => {
                       type="number"
                       value={product.quantity}
                     />
+                  </div>
+                  <div className="col-sm-6 edit-input">
+                    <label>Product Category*</label>
+                    <select onChange={onChange} name="category">
+                      <option value={"65450882d722235a28fsssss"}>
+                        Choose Category
+                      </option>
+                      {categories?.map((c) => (
+                        <option value={c._id}>{c.name}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
                 <div className="d-flex gap-5 edit-btn col-sm-12">

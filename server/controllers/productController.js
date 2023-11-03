@@ -58,7 +58,7 @@ exports.createProductController = async (req, res) => {
 // Get All Products
 exports.getAllProductController = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate("category");
     return res.status(200).send({
       success: true,
       message: "Getting All Products",
@@ -89,6 +89,9 @@ exports.updateProductController = async (req, res) => {
     if (!name) {
       return res.status(400).send({ message: "Name is Required" });
     }
+    if (category === "65450882d722235a28fsssss") {
+      return res.status(400).send({ message: "Category Is Required" });
+    }
     if (!quantity) {
       return res.status(400).send({ message: "Quantity is Required" });
     }
@@ -99,21 +102,36 @@ exports.updateProductController = async (req, res) => {
       return res.status(400).send({ message: "Price is Required" });
     }
 
-    let product = await Product.findOne({ _id: req.params.id });
+    let product = await Product.findOne({ _id: req.params.id }).populate(
+      "category"
+    );
     if (!product) {
       return res.status(400).send({
         success: false,
         message: "Product Not Found",
       });
     }
-    product = await Product.findByIdAndUpdate(
-      product._id,
-      {
-        ...req.body,
-        slug: slugify(name),
-      },
-      { new: true }
-    );
+    if (!product.category) {
+      product = await Product.findByIdAndUpdate(
+        product._id,
+        {
+          ...req.body,
+          slug: slugify(name),
+        },
+        { $push: { category } },
+        { new: true }
+      );
+    } else {
+      product = await Product.findByIdAndUpdate(
+        product._id,
+        {
+          ...req.body,
+          slug: slugify(name),
+        },
+        { new: true }
+      );
+    }
+
     return res.status(200).send({
       success: true,
       message: "Product Updated Successfully",
@@ -159,7 +177,9 @@ exports.deleteProductController = async (req, res) => {
 // Get Single Product
 exports.getSingleProductController = async (req, res) => {
   try {
-    const product = await Product.findOne({ slug: req.params.slug });
+    const product = await Product.findOne({ slug: req.params.slug }).populate(
+      "category"
+    );
     if (!product) {
       return res.status(400).send({
         success: false,
