@@ -1,4 +1,5 @@
 const express = require("express");
+const formidable = require("express-formidable");
 const {
   createProductController,
   updateProductController,
@@ -13,7 +14,13 @@ const router = express.Router();
 // ALL ROUTES
 
 // CREATE PRODUCT || METHOD POST
-router.post("/create-product", requireSignIn, isAdmin, createProductController);
+router.post(
+  "/create-product",
+  requireSignIn,
+  isAdmin,
+  formidable(),
+  createProductController
+);
 
 // UPDATE PRODUCT || METHOD PUT
 router.put(

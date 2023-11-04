@@ -450,6 +450,23 @@ button.cat-update-btn {
   opacity: 0;
   visibility: hidden;
 }
+.product-img .img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.product-img .img img {
+  object-fit: cover;
+}
+.product_photo-select {
+  background: #3bb3a9;
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
 /**************  Admin & User Dashboard  End **************/
 
 /**************  Product Start **************/

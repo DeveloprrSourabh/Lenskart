@@ -3,6 +3,7 @@ import Layout from "../../Components/Layout";
 import AdminMenu from "../../Components/AdminMenu";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
+import axios from "axios";
 import useCategory from "../../hooks/useCategory";
 
 const host = "http://localhost:8080";
@@ -15,7 +16,9 @@ const CreateProduct = () => {
     description: "",
     quantity: "",
     price: "",
+    category: "",
   });
+  const [photo, setPhoto] = useState("");
 
   const onChange = (e) => {
     setProduct({
@@ -24,32 +27,43 @@ const CreateProduct = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await fetch(`${host}/api/v1/product/create-product`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth?.token,
-        },
-        body: JSON.stringify(product),
-      });
-      const data = await res.json();
-      if (data.success) {
-        toast.success(data.message);
+      const productData = new FormData();
+      productData.append("name", product.name);
+      productData.append("description", product.description);
+      productData.append("quantity", product.quantity);
+      productData.append("price", product.price);
+      productData.append("category", product.category);
+      productData.append("photo", photo);
+
+      const { data } = await axios.post(
+        `${host}/api/v1/product/create-product`,
+        productData,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
+      );
+      // const data = await res.json();
+      if (!data?.success) {
+        toast.error(data.message);
+      } else {
+        toast.success(data?.message);
         setProduct({
           name: "",
           description: "",
           quantity: "",
           price: "",
         });
-      } else {
-        toast.error(data.message);
+        setPhoto("");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something Went Wrong");
+      return toast.error(error.response.data.message);
     }
   };
 
@@ -62,8 +76,37 @@ const CreateProduct = () => {
             <div className="update-profile">
               <h1 className="edit-heading">Products</h1>
               <h2 className="edit-subheading">Create Product</h2>
-              <form className="edit-profile" onSubmit={handleSubmit}>
+              <div className="edit-profile">
                 <div className="row">
+                  <div className="col-sm-12 product-img text-center p-3">
+                    <label>
+                      {photo && (
+                        <div className="img mb-3">
+                          <img
+                            className="w-100 h-100"
+                            src={URL.createObjectURL(photo)}
+                            alt="product_photo"
+                          />
+                        </div>
+                      )}
+                      <div className="create-product-name my-3">
+                        {photo ? (
+                          photo?.name.substring(0, 20) + "..."
+                        ) : (
+                          <div className="product_photo-select">
+                            Upload Photo
+                          </div>
+                        )}
+                      </div>
+                      <input
+                        name="photo"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setPhoto(e.target.files[0])}
+                        hidden
+                      />
+                    </label>
+                  </div>
                   <div className="col-sm-6 edit-input">
                     <label>Product Name*</label>
                     <input
@@ -121,9 +164,11 @@ const CreateProduct = () => {
                   </div>
                 </div>
                 <div className="edit-btn col-sm-12">
-                  <button className="edit-form-btn">Create Product</button>
+                  <button onClick={handleClick} className="edit-form-btn">
+                    Create Product
+                  </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

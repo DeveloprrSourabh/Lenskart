@@ -1,11 +1,12 @@
 const Product = require("../models/productModel");
 const slugify = require("slugify");
+const fs = require("fs");
 // Create product
 exports.createProductController = async (req, res) => {
   try {
     const { name, slug, description, price, quantity, shipping, category } =
-      req.body;
-
+      req.fields;
+    const { photo } = req.files;
     // Check Existing product
     const existsProduct = await Product.findOne({ name });
     if (existsProduct) {
@@ -16,6 +17,11 @@ exports.createProductController = async (req, res) => {
     // Check Validation
     if (!name) {
       return res.status(400).send({ message: "Name Is Required" });
+    }
+    if (!photo || (photo && photo.size > 1000000)) {
+      return res
+        .status(400)
+        .send({ message: "Photo Is Required And Should Be Less Then 1 MB" });
     }
     if (category === "65450882d722235a28fsssss") {
       return res.status(400).send({ message: "Category Is Required" });
@@ -31,15 +37,15 @@ exports.createProductController = async (req, res) => {
       return res.status(400).send({ message: "Quantity Is Required" });
     }
 
-    const product = await new Product({
-      name,
-      description,
-      price,
-      quantity,
-      category,
-      shipping,
+    let product = await new Product({
+      ...req.fields,
       slug: slugify(name),
-    }).save();
+    });
+    if (photo) {
+      product.photo.data = fs.readFileSync(photo.path);
+      product.photo.contentType = photo.type;
+    }
+    await product.save();
     return res.status(201).send({
       success: true,
       message: "Prodduct Created Successfully",

@@ -37,7 +37,6 @@ const Products = () => {
           <AdminMenu />
           <div className="col-sm-9 no-padding">
             <div className="update-profile">
-              <h1 className="edit-heading">Products</h1>
               <h2 className="edit-subheading">All Products</h2>
               <div className="all-products mb-4 row">
                 {products &&
