@@ -37,7 +37,7 @@ const CreateProduct = () => {
       productData.append("quantity", product.quantity);
       productData.append("price", product.price);
       productData.append("category", product.category);
-      productData.append("photo", photo);
+      photo && productData.append("photo", photo);
 
       const { data } = await axios.post(
         `${host}/api/v1/product/create-product`,
@@ -62,7 +62,6 @@ const CreateProduct = () => {
         setPhoto("");
       }
     } catch (error) {
-      console.log(error);
       return toast.error(error.response.data.message);
     }
   };

@@ -6,6 +6,7 @@ const {
   deleteProductController,
   getAllProductController,
   getSingleProductController,
+  getProductPhotoController,
 } = require("../controllers/productController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -27,6 +28,7 @@ router.put(
   "/update-product/:id",
   requireSignIn,
   isAdmin,
+  formidable(),
   updateProductController
 );
 
@@ -43,5 +45,8 @@ router.get("/get-products/", getAllProductController);
 
 // GET SINGLE PRODUCT || METHOD GET
 router.get("/get-product/:slug", getSingleProductController);
+
+// PRODUCT PHOTO || METHOD GET
+router.get("/product-photo/:id", getProductPhotoController);
 
 module.exports = router;

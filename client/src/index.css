@@ -473,6 +473,13 @@ button.cat-update-btn {
 .product-img {
   padding-top: 20px;
 }
+.all-products .product-img {
+  height: 200px;
+  padding-top: 20px;
+  overflow: hidden;
+  width: 250px;
+  margin: auto;
+}
 .product-details {
   padding: 10px;
 }

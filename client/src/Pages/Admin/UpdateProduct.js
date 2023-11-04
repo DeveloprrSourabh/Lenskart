@@ -3,6 +3,7 @@ import Layout from "../../Components/Layout";
 import AdminMenu from "../../Components/AdminMenu";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
+import axios from "axios";
 import useCategory from "../../hooks/useCategory";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -20,6 +21,7 @@ const UpdateProduct = () => {
     price: "",
     category: "",
   });
+  const [photo, setPhoto] = useState("");
 
   const onChange = (e) => {
     setProduct({
@@ -48,18 +50,26 @@ const UpdateProduct = () => {
   const handleSubmit = async (e, id) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${host}/api/v1/product/update-product/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth?.token,
-        },
-        body: JSON.stringify(product),
-      });
-      const data = await res.json();
+      const productData = new FormData();
+      productData.append("name", product.name);
+      productData.append("description", product.description);
+      productData.append("quantity", product.quantity);
+      productData.append("price", product.price);
+      productData.append("category", product.category._id);
+      photo && productData.append("photo", photo);
+
+      const { data } = await axios.put(
+        `${host}/api/v1/product/update-product/${id}`,
+        productData,
+        {
+          headers: {
+            Authorization: auth?.token,
+          },
+        }
+      );
       if (data.success) {
         toast.success(data.message);
-        navigate("/dashboard/admin/products");
+        navigate("/dashboard/admin/create-product");
       } else {
         toast.error(data.message);
       }
@@ -104,13 +114,45 @@ const UpdateProduct = () => {
             <div className="update-profile">
               <h1 className="edit-heading">Products</h1>
               <h2 className="edit-subheading">Update Product</h2>
-              <form
-                className="edit-profile"
-                onSubmit={(e) => {
-                  handleSubmit(e, product._id);
-                }}
-              >
+              <div className="edit-profile">
                 <div className="row">
+                  <div className="col-sm-12 product-img text-center p-3">
+                    <label>
+                      {photo ? (
+                        <div className="img mb-3">
+                          <img
+                            className="w-100 h-100"
+                            src={URL.createObjectURL(photo)}
+                            alt="product_photo"
+                          />
+                        </div>
+                      ) : (
+                        <div className="img mb-3">
+                          <img
+                            className="w-100 h-100"
+                            src={`${host}/api/v1/product/product-photo/${product._id}`}
+                            alt="product_photo"
+                          />
+                        </div>
+                      )}
+                      <div className="create-product-name my-3">
+                        {photo ? (
+                          photo?.name.substring(0, 20) + "..."
+                        ) : (
+                          <div className="product_photo-select">
+                            Upload Photo
+                          </div>
+                        )}
+                      </div>
+                      <input
+                        name="photo"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setPhoto(e.target.files[0])}
+                        hidden
+                      />
+                    </label>
+                  </div>
                   <div className="col-sm-6 edit-input">
                     <label>Product Name*</label>
                     <input
@@ -149,18 +191,28 @@ const UpdateProduct = () => {
                   </div>
                   <div className="col-sm-6 edit-input">
                     <label>Product Category*</label>
-                    <select onChange={onChange} name="category">
+                    {console.log(product)}
+                    <select
+                      value={product.category._id}
+                      onChange={onChange}
+                      name="category"
+                    >
                       <option value={"65450882d722235a28fsssss"}>
                         Choose Category
                       </option>
                       {categories?.map((c) => (
-                        <option value={c._id}>{c.name}</option>
+                        <option value={c?._id}>{c.name}</option>
                       ))}
                     </select>
                   </div>
                 </div>
                 <div className="d-flex gap-5 edit-btn col-sm-12">
-                  <button className="edit-form-btn">
+                  <button
+                    onClick={(e) => {
+                      handleSubmit(e, product._id);
+                    }}
+                    className="edit-form-btn"
+                  >
                     <b>Update Product</b>
                   </button>
                   <div
@@ -172,7 +224,7 @@ const UpdateProduct = () => {
                     <b>Delete Product</b>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

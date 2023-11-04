@@ -83,7 +83,9 @@ exports.getAllProductController = async (req, res) => {
 // Update Product
 exports.updateProductController = async (req, res) => {
   try {
-    const { name, quantity, price, description, category, shipping } = req.body;
+    const { name, quantity, price, description, category, shipping } =
+      req.fields;
+    const { photo } = req.files;
     // Check Existing product
     // const existsProduct = await Product.findOne({ name });
     // if (existsProduct) {
@@ -108,9 +110,7 @@ exports.updateProductController = async (req, res) => {
       return res.status(400).send({ message: "Price is Required" });
     }
 
-    let product = await Product.findOne({ _id: req.params.id }).populate(
-      "category"
-    );
+    let product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(400).send({
         success: false,
@@ -121,21 +121,31 @@ exports.updateProductController = async (req, res) => {
       product = await Product.findByIdAndUpdate(
         product._id,
         {
-          ...req.body,
+          ...req.fields,
           slug: slugify(name),
         },
-        { $push: { category } },
+        { $push: { category: category } },
         { new: true }
       );
+      if (photo) {
+        product.photo.data = fs.readFileSync(photo.path);
+        product.photo.contentType = photo.type;
+      }
+      product.save();
     } else {
       product = await Product.findByIdAndUpdate(
         product._id,
         {
-          ...req.body,
+          ...req.fields,
           slug: slugify(name),
         },
         { new: true }
       );
+      if (photo) {
+        product.photo.data = fs.readFileSync(photo.path);
+        product.photo.contentType = photo.type;
+      }
+      product.save();
     }
 
     return res.status(200).send({
@@ -202,6 +212,32 @@ exports.getSingleProductController = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "Error While Getting Single Product",
+      error,
+    });
+  }
+};
+
+// Get Product Photo
+
+exports.getProductPhotoController = async (req, res) => {
+  try {
+    const id = req.params.id;
+    let product = await Product.findById(id).select("photo");
+    if (!product) {
+      return res.status(400).send({
+        success: false,
+        message: "Product Not Found",
+      });
+    }
+    if (product.photo.data) {
+      res.set("Content-type", product.photo.contentType);
+      return res.status(200).send(product.photo.data);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting Product Photo",
       error,
     });
   }

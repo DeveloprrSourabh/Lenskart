@@ -8,6 +8,7 @@ const host = "http://localhost:8080";
 const Products = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
+  const [show, setShow] = useState(false);
   // Get All Products
   const getAllProducts = async () => {
     try {
@@ -29,6 +30,11 @@ const Products = () => {
   };
   useEffect(() => {
     getAllProducts();
+    {
+      setTimeout(() => {
+        setShow(true);
+      }, 999);
+    }
   }, []);
   return (
     <Layout>
@@ -48,11 +54,16 @@ const Products = () => {
                           className="d-block mb-4 main-product"
                         >
                           <div className="product-img">
-                            <img
-                              className="w-100"
-                              src="/Images/lens.jpg"
-                              alt=""
-                            />
+                            {show ? (
+                              <img
+                                className="w-100"
+                                // src="/Images/lens.jpg
+                                src={`${host}/api/v1/product/product-photo/${p?._id}`}
+                                alt={p._id}
+                              />
+                            ) : (
+                              "Loading Image..."
+                            )}
                           </div>
                           <div className="product-details">
                             <div className="stars d-flex gap-1">
