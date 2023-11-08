@@ -153,6 +153,55 @@ const Shop = () => {
                   </div>
                 </div>
                 <div className="all-product my-4 px-3">
+                  <div className="all-filters">
+                    <span className="showfilters">
+                      {checked.length > 0 && "FRAME CATEGORY:"}
+                      {categories.length > 0
+                        ? categories.map((c) => {
+                            return (
+                              <>
+                                {checked.map((ce) => {
+                                  return c._id === ce ? (
+                                    <div className="cats-filter">
+                                      <span className="cats-names">
+                                        {c.name}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  );
+                                })}
+                              </>
+                            );
+                          })
+                        : ""}
+                    </span>
+                    {radio.length ? (
+                      <span className="showfilters">
+                        {radio.length && "FRAME PRICE:"}
+
+                        <div className="cats-filter">
+                          <span className="cats-names">
+                            {radio[0]}$ to {radio[1]}$
+                          </span>
+                        </div>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    {checked.length > 0 || radio.length ? (
+                      <div
+                        onClick={() => {
+                          window.location.reload();
+                        }}
+                        className="mb-3 reset-filter  btn btn-danger btn-sm"
+                      >
+                        Reset Filter
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                   <div className="all-products not-scroller mb-4 row">
                     {products &&
                       products.map((p) => {

@@ -252,7 +252,7 @@ exports.productFilterController = async (req, res) => {
     let args = {};
     if (checked.length > 0) args.category = checked;
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
-    const products = await Product.find(args);
+    const products = await Product.find(args).populate("category");
     return res.status(200).send({
       success: true,
       message: "getting product by filter",
