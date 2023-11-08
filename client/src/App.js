@@ -11,6 +11,7 @@ import CreateProduct from "./Pages/Admin/CreateProduct";
 import UpdateProduct from "./Pages/Admin/UpdateProduct";
 import Products from "./Pages/Admin/Products";
 import Shop from "./Pages/Shop";
+import SingleShop from "./Pages/SingleShop";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/:slug" element={<SingleShop />} />
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />

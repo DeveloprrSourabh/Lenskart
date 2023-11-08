@@ -245,6 +245,7 @@ exports.getProductPhotoController = async (req, res) => {
 };
 
 // Product Filter
+
 exports.productFilterController = async (req, res) => {
   try {
     const { checked, radio } = req.body;
@@ -252,17 +253,16 @@ exports.productFilterController = async (req, res) => {
     if (checked.length > 0) args.category = checked;
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
     const products = await Product.find(args);
-
     return res.status(200).send({
       success: true,
-      message: "Getting filtered product",
+      message: "getting product by filter",
       products,
     });
   } catch (error) {
     console.log(error);
     return res.status(400).send({
-      success: false,
-      message: "Error While Filter Product",
+      success: true,
+      message: "Error While Filtering Product",
       error,
     });
   }

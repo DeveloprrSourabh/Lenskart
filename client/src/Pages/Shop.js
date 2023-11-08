@@ -34,46 +34,45 @@ const Shop = () => {
     }
   };
   useEffect(() => {
-    if (!checked.length && !radio.length) getAllProducts();
+    if (!radio.length && !checked.length) getAllProducts();
     {
       setTimeout(() => {
         setShow(true);
       }, 999);
     }
-  }, [checked.length, radio.length]);
+  }, [radio.length, checked.length]);
   const categories = useCategory();
 
-  // Filter product
+  // Filter Product
   const handleFilter = async (value, id) => {
+    let all = [...checked];
+    if (value) {
+      all.push(id);
+    } else {
+      all = all.filter((c) => c !== id);
+    }
+    setChecked(all);
+  };
+
+  useEffect(() => {
+    if (checked.length > 0 || radio.length) getFilterProduct();
+  }, [checked, radio]);
+  //Get Filtered Product
+  const getFilterProduct = async () => {
     try {
-      let all = [...checked];
-      if (value) {
-        all.push(id);
-      } else {
-        all = all.filter((e) => e !== id);
-      }
-      setChecked(all);
+      const res = await fetch(`${host}/api/v1/product/product-filters`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ checked, radio }),
+      });
+      const data = await res.json();
+      setProducts(data?.products);
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (checked.length || radio.length) filterproduct();
-  }, [checked, radio]);
-  // Get Filter Product
-  const filterproduct = async () => {
-    const res = await fetch(`${host}/api/v1/product/product-filters`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ checked, radio }),
-    });
-    const data = await res.json();
-    setProducts(data?.products);
-  };
-
   return (
     <Layout>
       <div className="home-page">
@@ -108,7 +107,7 @@ const Shop = () => {
                         })}
                     </ul>
                   </div>
-                  <h3 className="cat-filt mt-3">Frame Price</h3>
+                  <h3 className="cat-filt mb-3">Frame Price</h3>
                   <div className="filters">
                     <ul className="category-list">
                       {Prices &&
@@ -118,13 +117,14 @@ const Shop = () => {
                               <div className="cat-filter">
                                 <input
                                   type="radio"
-                                  name="price"
                                   value={c.array}
                                   onChange={(e) => {
                                     setRadio(
                                       e.target.value.split(",").map(Number)
                                     );
                                   }}
+                                  name="price"
+                                  id=""
                                 />
                               </div>
                               <label>{c.name}</label>
@@ -159,7 +159,7 @@ const Shop = () => {
                         return (
                           <div key={p?._id} className=" col-sm-4 p-0">
                             <Link
-                              to={`/dashboard/admin/edit-product/${p.slug}`}
+                              to={`/shop/${p.slug}`}
                               className="d-block mb-4 main-product"
                             >
                               <div className="product-img">

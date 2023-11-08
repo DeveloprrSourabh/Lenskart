@@ -6,28 +6,22 @@ export const Prices = [
   },
   {
     _id: 2,
-    name: "20$ to 39$",
-    array: [20, 39],
+    name: "20$ to 49$",
+    array: [20, 49],
   },
   {
     _id: 3,
-    name: "40$ to 59$",
-    array: [40, 59],
+    name: "50$ to 79$",
+    array: [50, 79],
   },
   {
     _id: 4,
-    name: "60$ to 79$",
-    array: [60, 79],
+    name: "80$ to 99$",
+    array: [80, 99],
   },
   {
     _id: 5,
-    name: "70$ to 89$",
-    array: [70, 89],
-  },
-
-  {
-    _id: 7,
-    name: "100$ to Above",
+    name: "100$ and Above",
     array: [100, 9999],
   },
 ];

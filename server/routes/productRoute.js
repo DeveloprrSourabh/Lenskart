@@ -50,7 +50,7 @@ router.get("/get-product/:slug", getSingleProductController);
 // PRODUCT PHOTO || METHOD GET
 router.get("/product-photo/:slug", getProductPhotoController);
 
-// PRODUCT FILTER || METHOD GET
-router.post("/product-filters/", productFilterController);
+// PRODUCT FILTER || METHOD POST
+router.post("/product-filters/",productFilterController);
 
 module.exports = router;
