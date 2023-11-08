@@ -48,7 +48,7 @@ const Products = () => {
                 {products &&
                   products.map((p) => {
                     return (
-                      <div key={p._id} className=" col-sm-4 p-0">
+                      <div key={p?._id} className=" col-sm-4 p-0">
                         <Link
                           to={`/dashboard/admin/edit-product/${p.slug}`}
                           className="d-block mb-4 main-product"
@@ -58,7 +58,7 @@ const Products = () => {
                               <img
                                 className="w-100"
                                 // src="/Images/lens.jpg
-                                src={`${host}/api/v1/product/product-photo/${p?._id}`}
+                                src={`${host}/api/v1/product/product-photo/${p?.slug}`}
                                 alt={p._id}
                               />
                             ) : (

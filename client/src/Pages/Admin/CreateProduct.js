@@ -17,6 +17,7 @@ const CreateProduct = () => {
     quantity: "",
     price: "",
     category: "",
+    shipping: "",
   });
   const [photo, setPhoto] = useState("");
 
@@ -37,6 +38,7 @@ const CreateProduct = () => {
       productData.append("quantity", product.quantity);
       productData.append("price", product.price);
       productData.append("category", product.category);
+      productData.append("shipping", product.shipping);
       photo && productData.append("photo", photo);
 
       const { data } = await axios.post(
@@ -58,6 +60,8 @@ const CreateProduct = () => {
           description: "",
           quantity: "",
           price: "",
+          category: "",
+          shipping: "",
         });
         setPhoto("");
       }
@@ -73,7 +77,6 @@ const CreateProduct = () => {
           <AdminMenu />
           <div className="col-sm-6 no-padding">
             <div className="update-profile">
-              <h1 className="edit-heading">Products</h1>
               <h2 className="edit-subheading">Create Product</h2>
               <div className="edit-profile">
                 <div className="row">

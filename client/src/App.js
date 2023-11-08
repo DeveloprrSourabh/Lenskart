@@ -10,12 +10,14 @@ import CreateCategory from "./Pages/Admin/CreateCategory";
 import CreateProduct from "./Pages/Admin/CreateProduct";
 import UpdateProduct from "./Pages/Admin/UpdateProduct";
 import Products from "./Pages/Admin/Products";
+import Shop from "./Pages/Shop";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />

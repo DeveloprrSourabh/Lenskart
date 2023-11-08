@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -9,7 +10,7 @@ const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const data = localStorage.getItem("auth");
+    let data = localStorage.getItem("auth");
     if (data) {
       let parseData = JSON.parse(data);
 
@@ -19,7 +20,7 @@ const AuthProvider = ({ children }) => {
         token: parseData.token,
       });
     }
-  }, []);
+  }, [setAuth]);
   return (
     <AuthContext.Provider value={[auth, setAuth]}>
       {children}

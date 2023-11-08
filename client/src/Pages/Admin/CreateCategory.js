@@ -152,7 +152,7 @@ const CreateCategory = () => {
             </div>
           </div>
           <div className="col-sm-4">
-            <div className="all-categories" id="myScroll">
+            <div className="all-categories scroller" id="myScroll">
               {categories.map((c) => {
                 return (
                   <>

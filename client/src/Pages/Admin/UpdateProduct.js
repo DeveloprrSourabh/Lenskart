@@ -55,7 +55,7 @@ const UpdateProduct = () => {
       productData.append("description", product.description);
       productData.append("quantity", product.quantity);
       productData.append("price", product.price);
-      productData.append("category", product.category._id);
+      productData.append("category", product.category);
       photo && productData.append("photo", photo);
 
       const { data } = await axios.put(
@@ -74,8 +74,9 @@ const UpdateProduct = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Something Went Wrong");
+      if (error.response.data.error.kind === "ObjectId") {
+        toast.error("Choose An Category");
+      }
     }
   };
 
@@ -130,7 +131,7 @@ const UpdateProduct = () => {
                         <div className="img mb-3">
                           <img
                             className="w-100 h-100"
-                            src={`${host}/api/v1/product/product-photo/${product._id}`}
+                            src={`${host}/api/v1/product/product-photo/${product.slug}`}
                             alt="product_photo"
                           />
                         </div>
@@ -192,11 +193,7 @@ const UpdateProduct = () => {
                   <div className="col-sm-6 edit-input">
                     <label>Product Category*</label>
                     {console.log(product)}
-                    <select
-                      value={product.category._id}
-                      onChange={onChange}
-                      name="category"
-                    >
+                    <select onChange={onChange} name="category">
                       <option value={"65450882d722235a28fsssss"}>
                         Choose Category
                       </option>

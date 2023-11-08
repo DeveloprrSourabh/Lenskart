@@ -221,8 +221,9 @@ exports.getSingleProductController = async (req, res) => {
 
 exports.getProductPhotoController = async (req, res) => {
   try {
-    const id = req.params.id;
-    let product = await Product.findById(id).select("photo");
+    let product = await Product.findOne({ slug: req.params.slug }).select(
+      "photo"
+    );
     if (!product) {
       return res.status(400).send({
         success: false,
@@ -238,6 +239,28 @@ exports.getProductPhotoController = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "Error While Getting Product Photo",
+      error,
+    });
+  }
+};
+
+// Product Filter
+exports.productFilterController = async (req, res) => {
+  try {
+    const { checked } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    const products = await Product.find(args);
+    return res.status(200).send({
+      success: true,
+      message: "Getting filtered product",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Filter Product",
       error,
     });
   }

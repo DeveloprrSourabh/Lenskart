@@ -3,10 +3,10 @@ import Header from "./Header";
 import toast, { Toaster } from "react-hot-toast";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, update }) => {
   return (
     <>
-      <Header />
+      <Header update={update} />
       <Toaster />
       {children}
       <Footer />

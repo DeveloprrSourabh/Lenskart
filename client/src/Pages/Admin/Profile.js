@@ -3,12 +3,13 @@ import Layout from "../../Components/Layout";
 import AdminMenu from "../../Components/AdminMenu";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const host = "http://localhost:8080";
 
 const Profile = () => {
   const [auth, setAuth] = useAuth();
-
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: auth?.user?.name,
     email: auth?.user?.email,
@@ -40,6 +41,8 @@ const Profile = () => {
         ls = JSON.parse(ls);
         ls.user = data.user;
         localStorage.setItem("auth", JSON.stringify(ls));
+        console.log(ls);
+        navigate("/");
       } else {
         toast.error(data.message);
       }
@@ -49,7 +52,7 @@ const Profile = () => {
     }
   };
   return (
-    <Layout>
+    <Layout update={handleSubmit}>
       <div className="admin-dashboard">
         <div className="row no-padding my-account-wrapper">
           <AdminMenu />

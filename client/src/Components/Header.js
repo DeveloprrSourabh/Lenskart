@@ -96,7 +96,7 @@ const Header = () => {
                     {auth && auth.user ? (
                       <div>
                         <li className="header-user position-relative">
-                          <Link>{auth?.user?.name} </Link>
+                          <Link>{auth?.user.name} </Link>
                           <span className="header_user_rotate">▾</span>
 
                           <ul className="header-user_ul">
