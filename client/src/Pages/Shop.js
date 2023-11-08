@@ -4,6 +4,7 @@ import Register from "./Auth/Register";
 import useCategory from "../hooks/useCategory";
 import { useAuth } from "../context/auth";
 import { Link } from "react-router-dom";
+import { Prices } from "../Components/Prices";
 
 const host = "http://localhost:8080";
 
@@ -11,6 +12,7 @@ const Shop = () => {
   const [auth, setAuth] = useAuth();
   const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState([]);
+  const [radio, setRadio] = useState([]);
   const [show, setShow] = useState(false);
   // Get All Products
   const getAllProducts = async () => {
@@ -32,13 +34,13 @@ const Shop = () => {
     }
   };
   useEffect(() => {
-    if (!checked.length) getAllProducts();
+    if (!checked.length && !radio.length) getAllProducts();
     {
       setTimeout(() => {
         setShow(true);
       }, 999);
     }
-  }, [checked.length]);
+  }, [checked.length, radio.length]);
   const categories = useCategory();
 
   // Filter product
@@ -57,8 +59,8 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    filterproduct();
-  }, [checked]);
+    if (checked.length || radio.length) filterproduct();
+  }, [checked, radio]);
   // Get Filter Product
   const filterproduct = async () => {
     const res = await fetch(`${host}/api/v1/product/product-filters`, {
@@ -66,7 +68,7 @@ const Shop = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ checked }),
+      body: JSON.stringify({ checked, radio }),
     });
     const data = await res.json();
     setProducts(data?.products);
@@ -97,6 +99,31 @@ const Shop = () => {
                                   id=""
                                   onChange={(e) => {
                                     handleFilter(e.target.checked, c._id);
+                                  }}
+                                />
+                              </div>
+                              <label>{c.name}</label>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </div>
+                  <h3 className="cat-filt mt-3">Frame Price</h3>
+                  <div className="filters">
+                    <ul className="category-list">
+                      {Prices &&
+                        Prices.map((c) => {
+                          return (
+                            <li className="cat-item d-flex">
+                              <div className="cat-filter">
+                                <input
+                                  type="radio"
+                                  name="price"
+                                  value={c.array}
+                                  onChange={(e) => {
+                                    setRadio(
+                                      e.target.value.split(",").map(Number)
+                                    );
                                   }}
                                 />
                               </div>

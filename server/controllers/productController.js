@@ -247,10 +247,12 @@ exports.getProductPhotoController = async (req, res) => {
 // Product Filter
 exports.productFilterController = async (req, res) => {
   try {
-    const { checked } = req.body;
+    const { checked, radio } = req.body;
     let args = {};
     if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
     const products = await Product.find(args);
+
     return res.status(200).send({
       success: true,
       message: "Getting filtered product",

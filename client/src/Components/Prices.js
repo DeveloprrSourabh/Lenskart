@@ -21,17 +21,13 @@ export const Prices = [
   },
   {
     _id: 5,
-    name: "80$ to 99$",
-    array: [80, 99],
+    name: "70$ to 89$",
+    array: [70, 89],
   },
-  {
-    _id: 6,
-    name: "80$ to 99$",
-    array: [100, 9999],
-  },
+
   {
     _id: 7,
     name: "100$ to Above",
-    array: [100, 19],
+    array: [100, 9999],
   },
 ];
