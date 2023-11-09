@@ -8,6 +8,7 @@ const {
   getSingleProductController,
   getProductPhotoController,
   productFilterController,
+  productSearchController,
 } = require("../controllers/productController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -51,6 +52,9 @@ router.get("/get-product/:slug", getSingleProductController);
 router.get("/product-photo/:slug", getProductPhotoController);
 
 // PRODUCT FILTER || METHOD POST
-router.post("/product-filters/",productFilterController);
+router.post("/product-filters/", productFilterController);
+
+// PRODUCT SEARCH || METHOD GET
+router.get("/product-search/:keyword", productSearchController);
 
 module.exports = router;

@@ -13,6 +13,7 @@ import Products from "./Pages/Admin/Products";
 import Shop from "./Pages/Shop";
 import SingleShop from "./Pages/SingleShop";
 import CartPage from "./Pages/CartPage";
+import SearchPage from "./Pages/SearchPage";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:slug" element={<SingleShop />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/product/search" element={<SearchPage />} />
+        <Route path="/product-search/:keyword" element={<SearchPage />} />
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />

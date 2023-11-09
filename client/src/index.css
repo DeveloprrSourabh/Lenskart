@@ -773,4 +773,15 @@ span.showfilters {
   height: 100%;
   padding: 210px 0px;
 }
+.total-search {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+.removecart {
+  margin: auto 0px auto auto;
+  width: fit-content;
+  display: flex;
+  height: 100%;
+}
 /**************  Cart Page End **************/

@@ -50,14 +50,14 @@ const CartPage = () => {
                     <div className="cart-price prdt-price">
                       <b className="text-dark">Product Price : </b>₹{c.price}
                     </div>
-                    <div
-                      onClick={() => {
-                        handleRemove(c._id);
-                      }}
-                      className="btn btn-danger btn-sm removecart"
-                    >
-                      Remove
-                    </div>
+                  </div>
+                  <div
+                    onClick={() => {
+                      handleRemove(c._id);
+                    }}
+                    className="btn btn-danger btn-sm removecart"
+                  >
+                    Remove
                   </div>
                 </div>
               );

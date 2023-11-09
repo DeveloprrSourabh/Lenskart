@@ -6,6 +6,7 @@ import Forgot from "../Pages/Auth/Forgot";
 import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
 import { useCart } from "../context/cart";
+import Search from "./Forms/Search";
 const Header = () => {
   const [cart, setCart] = useCart();
   const [show, setShow] = useState(false);
@@ -80,15 +81,7 @@ const Header = () => {
                   </div>
                 </li>
                 <li className="col-md-4 seond_head_list">
-                  <div className="search_form">
-                    <form>
-                      <input
-                        type="text"
-                        className="search_input"
-                        placeholder="What are you looking for?"
-                      />
-                    </form>
-                  </div>
+                  <Search />
                 </li>
                 <li className="col-md-4 second_head_list">
                   <ul className="other-menu d-flex align-items-center justify-content-between">
