@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import { useParams } from "react-router-dom";
+import { useCart } from "../context/cart";
+import toast from "react-hot-toast";
 
 const host = "http://localhost:8080";
 
 const SingleShop = () => {
+  const [cart, setCart] = useCart();
   const params = useParams();
   const [product, setProduct] = useState({});
 
@@ -93,7 +96,17 @@ const SingleShop = () => {
                 ( with 1 Year Warranty & 14 Day Return )
               </div>
             </div>
-            <div className="addtocart">
+            <div
+              className="addtocart"
+              onClick={() => {
+                setCart([...cart, product]);
+                localStorage.setItem(
+                  "cart",
+                  JSON.stringify([...cart, product])
+                );
+                toast.success("Item added to cart");
+              }}
+            >
               <button className="btn text-light">Add To Cart</button>
             </div>
           </div>

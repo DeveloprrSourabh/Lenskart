@@ -12,6 +12,7 @@ import UpdateProduct from "./Pages/Admin/UpdateProduct";
 import Products from "./Pages/Admin/Products";
 import Shop from "./Pages/Shop";
 import SingleShop from "./Pages/SingleShop";
+import CartPage from "./Pages/CartPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:slug" element={<SingleShop />} />
+        <Route path="/cart" element={<CartPage />} />
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />

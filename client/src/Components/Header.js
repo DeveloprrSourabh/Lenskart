@@ -5,7 +5,9 @@ import Login from "../Pages/Auth/Login";
 import Forgot from "../Pages/Auth/Forgot";
 import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
+import { useCart } from "../context/cart";
 const Header = () => {
+  const [cart, setCart] = useCart();
   const [show, setShow] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
@@ -152,7 +154,7 @@ const Header = () => {
                     </li>
                     <li>
                       <img src="/Images/bag.svg" alt="" />
-                      <Link>Cart</Link>
+                      <Link to={"/cart"}>Cart ( {cart?.length} )</Link>
                     </li>
                   </ul>
                 </li>

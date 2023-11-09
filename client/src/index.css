@@ -644,7 +644,11 @@ h3.cat-filt {
 .sgl-prdt-img img {
   width: 100%;
   height: inherit;
+  transition: all 1s;
   object-fit: contain;
+}
+.sgl-prdt-img:hover img {
+  transform: scale(1.05);
 }
 .sgl-prdt-img {
   border: 1px solid #ebebf0;
@@ -653,10 +657,7 @@ h3.cat-filt {
   height: 372px;
   overflow: hidden;
 }
-.single-product .col-sm-8 {
-  height: 100vh;
-  overflow: auto;
-}
+
 .prdt-name {
   color: #999999;
   font-weight: 400;
@@ -728,3 +729,48 @@ span.showfilters {
   border-radius: 8px;
 }
 /**************  Single Product End **************/
+
+/**************  Cart Page Start **************/
+.cart-prdt-img {
+  width: 100px;
+  height: 100px;
+}
+.cart-prdt-img img {
+  height: 100%;
+  object-fit: cover;
+}
+.cart-card {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px;
+}
+.prdt-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cart-price {
+  font-size: 18px;
+}
+.empty-heading {
+  color: rgb(0, 0, 66);
+  font-size: 24px;
+  text-align: center;
+}
+.empty-btn a {
+  background-color: rgb(17, 218, 172);
+  color: rgb(0, 0, 66);
+  border-radius: 30px;
+  padding: 12px;
+  font-size: 19px;
+  width: fit-content;
+}
+.emptycart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  justify-content: center;
+  height: 100%;
+  padding: 210px 0px;
+}
+/**************  Cart Page End **************/
