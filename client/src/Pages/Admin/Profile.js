@@ -41,7 +41,10 @@ const Profile = () => {
         ls = JSON.parse(ls);
         ls.user = data.user;
         localStorage.setItem("auth", JSON.stringify(ls));
-        console.log(ls);
+        setAuth({
+          ...auth,
+          user: ls.user,
+        });
         navigate("/");
       } else {
         toast.error(data.message);

@@ -104,7 +104,7 @@ const SingleShop = () => {
                   "cart",
                   JSON.stringify([...cart, product])
                 );
-                toast.success("Item added to cart");
+                toast.success("Item Added to cart");
               }}
             >
               <button className="btn text-light">Add To Cart</button>

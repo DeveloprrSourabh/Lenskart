@@ -1,6 +1,19 @@
 const Product = require("../models/productModel");
 const slugify = require("slugify");
 const fs = require("fs");
+const Order = require("../models/orderModel");
+const braintree = require("braintree");
+const orderModel = require("../models/orderModel");
+require("dotenv").config();
+
+// Payment Gateway
+var gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  merchantId: process.env.BRAINTREE_MERCHANT_ID,
+  publicKey: process.env.BRAINTTREE_PUBLIC_KEY,
+  privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+});
+
 // Create product
 exports.createProductController = async (req, res) => {
   try {
@@ -287,6 +300,46 @@ exports.productSearchController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: "Error while Searching Products",
+      error,
+    });
+  }
+};
+
+// Braintree Token
+exports.braintreeTokenController = async (req, res) => {
+  try {
+    gateway.clientToken.generate({}, function (err, response) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(response);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      error,
+    });
+  }
+};
+
+// Braintree Payment
+exports.braintreePaymentController = async (req, res) => {
+  try {
+    let { cart } = req.body;
+    console.log(cart);
+    console.log(req.body);
+    const order = new orderModel({
+      products: cart,
+      buyer: req.user._id,
+    }).save();
+    res.json({ ok: true, cart });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in payment gateway",
       error,
     });
   }

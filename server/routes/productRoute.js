@@ -9,6 +9,8 @@ const {
   getProductPhotoController,
   productFilterController,
   productSearchController,
+  braintreeTokenController,
+  braintreePaymentController,
 } = require("../controllers/productController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -56,5 +58,11 @@ router.post("/product-filters/", productFilterController);
 
 // PRODUCT SEARCH || METHOD GET
 router.get("/product-search/:keyword", productSearchController);
+
+// BRAINTREE TOKEN || METHOD GET
+router.get("/braintree/token", braintreeTokenController);
+
+// BRAINTREE PAYMENT || METHOD POST
+router.post("/braintree/payment", requireSignIn, braintreePaymentController);
 
 module.exports = router;
