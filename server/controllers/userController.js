@@ -8,7 +8,7 @@ require("dotenv").config();
 // Register User
 exports.userRegisterController = async (req, res) => {
   try {
-    const { name, email, password, answer, address } = req.body;
+    const { name, email, password, answer, address, role } = req.body;
     if (!name) {
       return res.send({ message: "Name is Required" });
     }
@@ -40,6 +40,7 @@ exports.userRegisterController = async (req, res) => {
     const user = await new User({
       name,
       email,
+      role,
       answer,
       address,
       password: secPass,

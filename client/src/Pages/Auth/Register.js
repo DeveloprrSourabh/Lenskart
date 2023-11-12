@@ -10,6 +10,7 @@ const Register = ({ show, setShow, setShowLogin }) => {
     email: "",
     password: "",
     answer: "",
+    role: "",
     address: "",
   });
   const onChange = (e) => {
@@ -75,6 +76,15 @@ const Register = ({ show, setShow, setShowLogin }) => {
             name="email"
             value={credentials.email}
             placeholder="Email*"
+          />
+        </div>
+        <div className="register-input">
+          <input
+            onChange={onChange}
+            type="number"
+            name="role"
+            value={credentials.role}
+            placeholder="Role*"
           />
         </div>
         <div className="register-input">

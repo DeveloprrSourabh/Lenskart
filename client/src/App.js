@@ -16,6 +16,7 @@ import CartPage from "./Pages/CartPage";
 import SearchPage from "./Pages/SearchPage";
 import Order from "./Pages/User/Order";
 import AdminOrder from "./Pages/Admin/AdminOrder";
+import UserProfile from "./Pages/User/Profile";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
         {/* User Routes */}
         <Route path="/dashboard" element={<Private />}>
           <Route path="user" element={<UserDashboard />} />
-          <Route path="profile" element={<UserDashboard />} />
+          <Route path="user/profile" element={<UserProfile />} />
           <Route path="user/orders" element={<Order />} />
         </Route>
       </Routes>
