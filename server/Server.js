@@ -11,6 +11,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+// configure the app to use bodyParser()
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 // Database connection
 connectToMongo();
 
@@ -21,7 +27,7 @@ app.use("/api/v1/auth/", userRoute);
 app.use("/api/v1/category/", categoryRoute);
 
 // Product Route
-app.use("/api/v1/product/", bodyParser.json(), productRoute);
+app.use("/api/v1/product/", productRoute);
 
 // Listen server
 app.listen(process.env.PORT, () => {

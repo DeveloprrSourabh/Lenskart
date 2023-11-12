@@ -77,7 +77,9 @@ exports.createProductController = async (req, res) => {
 // Get All Products
 exports.getAllProductController = async (req, res) => {
   try {
-    const products = await Product.find({}).populate("category");
+    const products = await Product.find({})
+      .populate("category")
+      .select("-photo");
     return res.status(200).send({
       success: true,
       message: "Getting All Products",
@@ -206,9 +208,9 @@ exports.deleteProductController = async (req, res) => {
 // Get Single Product
 exports.getSingleProductController = async (req, res) => {
   try {
-    const product = await Product.findOne({ slug: req.params.slug }).populate(
-      "category"
-    );
+    const product = await Product.findOne({ slug: req.params.slug })
+      .populate("category")
+      .select("-photo");
     if (!product) {
       return res.status(400).send({
         success: false,
@@ -265,7 +267,9 @@ exports.productFilterController = async (req, res) => {
     let args = {};
     if (checked.length > 0) args.category = checked;
     if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
-    const products = await Product.find(args).populate("category");
+    const products = await Product.find(args)
+      .populate("category")
+      .select("-photo");
     return res.status(200).send({
       success: true,
       message: "getting product by filter",
@@ -293,7 +297,7 @@ exports.productSearchController = async (req, res) => {
           description: { $regex: keyword, $options: "i" },
         },
       ],
-    });
+    }).select("-photo");
     res.json(result);
   } catch (error) {
     console.log(error);
@@ -327,20 +331,55 @@ exports.braintreeTokenController = async (req, res) => {
 // Braintree Payment
 exports.braintreePaymentController = async (req, res) => {
   try {
-    let { cart } = req.body;
-    console.log(cart);
-    console.log(req.body);
-    const order = new orderModel({
+    const { cart } = req.body;
+    const order = new Order({
       products: cart,
-      buyer: req.user._id,
-    }).save();
-    res.json({ ok: true, cart });
+      buyer: req?.user?._id,
+    });
+    await order.save();
+    return res.status(200).send({ order });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
-      success: false,
-      message: "Error in payment gateway",
-      error,
-    });
+    return res
+      .status(400)
+      .send({ success: false, message: "Error While Make Payment" });
+  }
+};
+// User Orders
+exports.userOrderController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyer: req.user._id })
+      .populate("products", "-photo")
+      .populate("buyer", "name");
+    return res
+      .status(200)
+      .send({ success: true, message: "Orders Getting Successfully", orders });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .send({ success: false, message: "Error While Getting User Orders" });
+  }
+};
+
+// Orders Status Update
+exports.OrderStatusController = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const orders = await orderModel.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
+    return res
+      .status(200)
+      .send({ success: true, message: "Order Status Updated", orders });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .send({ success: false, message: "Error While Updating Order Status" });
   }
 };

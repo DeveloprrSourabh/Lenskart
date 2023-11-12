@@ -66,18 +66,16 @@ const CartPage = () => {
   const handlePayment = async () => {
     try {
       setLoading(true);
-      const { res } = await axios.post(
-        `${host}/api/v1/product/braintree/payment`,
-        cart,
-        {
-          headers: {
-            "Content-Type": "appliction/json",
-            Authorization: auth?.token,
-          },
-        }
-      );
-      console.log(cart);
-      console.log(auth?.user);
+      const res = await fetch(`${host}/api/v1/product/braintree/payment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth?.token,
+        },
+        body: JSON.stringify({ cart }),
+      });
+      const data = await res.json();
+      console.log(data);
       setLoading(true);
       localStorage.removeItem("cart");
       setCart([]);

@@ -11,6 +11,8 @@ const {
   productSearchController,
   braintreeTokenController,
   braintreePaymentController,
+  userOrderController,
+  OrderStatusController,
 } = require("../controllers/productController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -64,5 +66,16 @@ router.get("/braintree/token", braintreeTokenController);
 
 // BRAINTREE PAYMENT || METHOD POST
 router.post("/braintree/payment", requireSignIn, braintreePaymentController);
+
+// USER ORDER || METHOD GET
+router.get("/orders", requireSignIn, userOrderController);
+
+//  ORDER STATUS UPDATE || METHOD POST
+router.put(
+  "/order-status/:orderId",
+  requireSignIn,
+  isAdmin,
+  OrderStatusController
+);
 
 module.exports = router;

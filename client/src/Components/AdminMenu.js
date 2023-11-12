@@ -55,6 +55,16 @@ const AdminMenu = () => {
           </li>
           <li>
             <Link
+              to={"/dashboard/admin/orders"}
+              className={`${
+                location.pathname === "/dashboard/admin/orders" ? "active" : ""
+              }`}
+            >
+              Orders
+            </Link>
+          </li>
+          <li>
+            <Link
               to={"/dashboard/admin/user"}
               className={`${
                 location.pathname === "/dashboard/admin/user"

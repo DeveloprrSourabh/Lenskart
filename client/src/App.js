@@ -14,6 +14,8 @@ import Shop from "./Pages/Shop";
 import SingleShop from "./Pages/SingleShop";
 import CartPage from "./Pages/CartPage";
 import SearchPage from "./Pages/SearchPage";
+import Order from "./Pages/User/Order";
+import AdminOrder from "./Pages/Admin/AdminOrder";
 
 function App() {
   return (
@@ -33,11 +35,13 @@ function App() {
           <Route path="admin/create-product" element={<CreateProduct />} />
           <Route path="admin/edit-product/:slug" element={<UpdateProduct />} />
           <Route path="admin/products" element={<Products />} />
+          <Route path="admin/orders" element={<AdminOrder />} />
         </Route>
         {/* User Routes */}
         <Route path="/dashboard" element={<Private />}>
           <Route path="user" element={<UserDashboard />} />
           <Route path="profile" element={<UserDashboard />} />
+          <Route path="user/orders" element={<Order />} />
         </Route>
       </Routes>
     </>

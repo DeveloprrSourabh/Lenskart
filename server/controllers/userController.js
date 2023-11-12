@@ -1,6 +1,7 @@
 const { compare } = require("bcryptjs");
 const { hashPassword, unHashPassword } = require("../helpers/userHelper");
 const User = require("../models/userModel");
+const Order = require("../models/orderModel");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
