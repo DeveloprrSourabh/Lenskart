@@ -13,6 +13,7 @@ const Header = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
   const [auth, setAuth] = useAuth();
+  const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -79,12 +80,50 @@ const Header = () => {
                   <div className="d-flex align-items-center number-logo">
                     <img src="/Images/lsNum.jpg" alt="" />
                   </div>
+                  <div className="d-none align-items-center mobile-menu">
+                    <Link to="/cart" className="text-end mx-3">
+                      <img src="/Images/bag.svg" width={"20%"} alt="" />
+                    </Link>
+                    <button
+                      className="bars mt-1"
+                      onClick={() => {
+                        setMenu(true);
+                        const body = document.getElementById("root");
+                        body.classList.add("formShow");
+                      }}
+                    >
+                      <i class="fa-solid fa-bars"></i>
+                    </button>
+                  </div>
                 </li>
                 <li className="col-md-4 seond_head_list">
                   <Search />
                 </li>
-                <li className="col-md-4 second_head_list">
+                <li
+                  className={`col-md-4 second_head_list ${
+                    menu ? "active" : ""
+                  }`}
+                >
                   <ul className="other-menu d-flex align-items-center justify-content-between">
+                    <div className="d-none  mobile-menu-head justify-content-between align-items-center">
+                      <div className="mobile-sec-img">
+                        <img
+                          className="w-75 mx-0"
+                          src="/Images/main_logo.svg"
+                          alt=""
+                        />
+                      </div>
+                      <div
+                        className="cross-menu"
+                        onClick={() => {
+                          setMenu(false);
+                          const body = document.getElementById("root");
+                          body.classList.remove("formShow");
+                        }}
+                      >
+                        <b>X</b>
+                      </div>
+                    </div>
                     <li>
                       <Link>Track Order</Link>
                     </li>

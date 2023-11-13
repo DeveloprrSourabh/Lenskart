@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800;1,900&display=swap");
-
+html,
+body {
+  position: relative;
+  overflow-x: hidden !important;
+}
 a {
   text-decoration: none;
 }
@@ -37,7 +41,7 @@ ul {
 }
 body,
 html {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   padding: 0;
   margin: 0;
   font-family: "Libre Baskerville", serif;
@@ -571,8 +575,11 @@ li.cat-item label {
 .cat-filter {
   padding: 1.5px;
   display: flex;
-  border: 2px solid rgb(178, 177, 177);
+  /* border: 2px solid rgb(178, 177, 177); */
   border-radius: 2px;
+}
+ul.category-list li input {
+  width: 17px;
 }
 h3.cat-filt {
   letter-spacing: 1.3px;
@@ -586,7 +593,7 @@ h3.cat-filt {
   flex-flow: column wrap;
   gap: 6px;
 }
-.home-page {
+.top-product {
   padding: 0px 2vw;
 }
 .main-banner img {
@@ -785,3 +792,293 @@ span.showfilters {
   height: 100%;
 }
 /**************  Cart Page End **************/
+
+/**************  Home Page Start **************/
+.prdt-names {
+  font-size: 15px;
+  color: rgb(138, 136, 136);
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 10px 0px;
+}
+.main-card-product {
+  position: relative;
+  padding: 5px;
+  background-color: #fbf9f7;
+  border-radius: 10px;
+}
+.prdt-prices {
+  font-weight: bold;
+  font-size: 12px;
+}
+.prdt-prices-val {
+  font-size: 12px;
+  font-weight: 500;
+}
+.prdt-bio {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99999999999;
+  background-color: #fbf9f7;
+  left: 0;
+  border-bottom-left-radius: 10px;
+  padding: 10px;
+  border-bottom-right-radius: 10px;
+}
+.main-card-product:hover .prdt-bio {
+  display: block;
+}
+.main-card-product:hover .prdt-car-img {
+  transform: scale(0.9);
+}
+button.slick-arrow.slick-prev:before {
+  font-weight: 700;
+  font-size: 45px;
+  color: white;
+  left: 98px;
+  content: "❮";
+  opacity: 1;
+}
+button.slick-arrow.slick-prev {
+  left: 50px;
+  z-index: 9999;
+}
+button.slick-arrow.slick-next:before {
+  font-weight: 700;
+  font-size: 45px;
+  color: white;
+  left: 98px;
+  content: "❯";
+  opacity: 1;
+}
+button.slick-arrow.slick-next {
+  right: 50px;
+  z-index: 9999;
+}
+.wearTrend {
+  font-size: 50px;
+  font-weight: 300;
+  text-align: left;
+  padding-top: 2%;
+  letter-spacing: -1px;
+}
+.trendwear {
+  font-weight: bold;
+}
+.trendytag {
+  font-size: 16px;
+  font-weight: 500;
+}
+.explore-trending-prdt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.trending-prdt-name {
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+}
+.trending-prdt-explore {
+  background: #56b7c3;
+  color: #ffffff;
+  padding: 10px 0;
+  width: 140px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
+}
+
+.trending-prdt button.slick-arrow.slick-prev:before {
+  font-weight: 700;
+  font-size: 35px;
+  color: #d4d4d4;
+  left: 98px;
+  content: "❮";
+  opacity: 1;
+}
+.trending-prdt button.slick-arrow.slick-prev {
+  left: -30px;
+}
+.trending-prdt button.slick-arrow.slick-next {
+  right: -30px;
+}
+.trending-prdt button.slick-arrow.slick-next:before {
+  font-weight: 700;
+  font-size: 35px;
+  color: #d4d4d4;
+  left: 98px;
+  content: "❯";
+  opacity: 1;
+}
+h4.banner-heading {
+  letter-spacing: 0.5px;
+  font-size: 30px;
+  margin-top: 80px;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+  width: 94%;
+  display: flex;
+  flex-direction: row;
+}
+.banner-heading:before,
+.banner-heading:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #cfcdcd;
+  margin: auto 15px;
+}
+
+/**************  Home Page End **************/
+
+/**************  Mobile Responsive **************/
+@media (max-width: 767px) {
+  body,
+  html {
+    overflow-x: hidden;
+  }
+  .main-header,
+  .number-logo {
+    display: none !important;
+  }
+  .mobile-menu {
+    display: flex !important;
+  }
+  button.bars {
+    color: #000;
+    background: transparent;
+    border: navajowhite;
+    font-size: 26px;
+  }
+
+  .main-logo img {
+    width: 150px;
+  }
+  .second_head_list ul {
+    position: absolute;
+    width: 70%;
+    background: #fff;
+    height: 100vh;
+    top: 0;
+    transition: all 0.5s;
+    transform: translateX(270px);
+    flex-direction: column;
+    z-index: 99999;
+    right: 0;
+    gap: 20px;
+    display: block !important;
+    padding: 20px;
+  }
+  .second_head_list.active ul {
+    transform: none;
+  }
+  .other-menu li {
+    padding: 10px 0px !important;
+    display: block;
+    font-weight: 500;
+    border-bottom: 1px solid #dee2e6;
+  }
+  .other-menu img {
+    margin-right: 5px;
+    margin-left: 0px;
+  }
+  .mobile-sec-img img {
+    margin-left: -13px !important;
+  }
+  .mobile-menu-head {
+    display: flex !important;
+  }
+  input.search_input {
+    padding: 9px 12px !important;
+  }
+  .search-btn button.btn-sm {
+    padding: 9px;
+  }
+  .search_form {
+    margin: 5px 0px 10px;
+  }
+  .main-top-product .col-sm-2 {
+    width: 50%;
+    margin: 10px 0px;
+  }
+  #masthead {
+    padding: 0px 12px;
+    margin: 0px 0px 10px;
+    box-shadow: 0px 0px 8px #adb5bdc4;
+  }
+  button.slick-arrow.slick-prev {
+    display: none !important;
+  }
+  button.slick-arrow.slick-next {
+    display: none !important;
+  }
+  .wearTrend {
+    font-size: 30px !important;
+    text-align: center;
+  }
+  h4.banner-heading {
+    letter-spacing: 0.5px;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  .first-sec h1 {
+    font-size: 19px;
+    line-height: 32px;
+  }
+  .first-sec {
+    display: none;
+  }
+  .second-sec .col-md-4 {
+    width: 50%;
+  }
+  .second-sec {
+    padding: 17px 34px 35px;
+  }
+  .third-sec,
+  .footer-line {
+    display: none !important;
+  }
+  .trending-prdt-explore {
+    width: 90%;
+  }
+  .all-products .col-sm-4.p-0 {
+    width: 50%;
+  }
+  .all-products .product-img {
+    width: 100%;
+    height: inherit;
+  }
+  .sortby .d-flex {
+    padding: 6px 22px;
+  }
+  .sidebar-category {
+    box-shadow: 0px 0px 6px #00000052;
+    margin: 14px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .filter-col {
+    height: auto;
+  }
+  .prdt-name,
+  .cart-price {
+    font-size: 12px;
+  }
+  .main-cart .col-sm-3 {
+    box-shadow: 0px 0px 6px #00000052;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .cart-page {
+    padding: 0px;
+  }
+  .cart-card {
+    margin: 10px 0px !important;
+    border-radius: 10px;
+  }
+}

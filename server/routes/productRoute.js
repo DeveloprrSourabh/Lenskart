@@ -13,6 +13,7 @@ const {
   braintreePaymentController,
   userOrderController,
   OrderStatusController,
+  topProductController,
 } = require("../controllers/productController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -77,5 +78,8 @@ router.put(
   isAdmin,
   OrderStatusController
 );
+
+// TOP 6 PRODUCTS|| METHOD GET
+router.get("/top-product", topProductController);
 
 module.exports = router;

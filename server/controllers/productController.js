@@ -383,3 +383,22 @@ exports.OrderStatusController = async (req, res) => {
       .send({ success: false, message: "Error While Updating Order Status" });
   }
 };
+
+// Top Product
+exports.topProductController = async (req, res) => {
+  try {
+    const products = await Product.find({}).sort({ createdAt: -1 }).limit(6);
+    return res.status(200).send({
+      success: true,
+      message: "Getting Top Products",
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting Top Products",
+      error,
+    });
+  }
+};
