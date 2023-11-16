@@ -129,12 +129,28 @@ const Header = () => {
                     </li>
                     {auth && auth.user ? (
                       <div>
-                        <li className="header-user position-relative">
+                        <li
+                          onClick={() => {
+                            let header =
+                              document.getElementsByClassName("header-user")[0];
+                            let headerUl =
+                              document.getElementsByClassName(
+                                "header-user_ul"
+                              )[0];
+                            headerUl.classList.toggle("active");
+                          }}
+                          className="header-user position-relative"
+                        >
                           <Link>{auth?.user?.name} </Link>
                           <span className="header_user_rotate">▾</span>
 
                           <ul className="header-user_ul">
-                            <li>
+                            <li
+                              onClick={() => {
+                                const body = document.getElementById("root");
+                                body.classList.remove("formShow");
+                              }}
+                            >
                               <Link
                                 className="header-user_list"
                                 to={`/dashboard/${
@@ -145,7 +161,12 @@ const Header = () => {
                               </Link>
                             </li>
 
-                            <li>
+                            <li
+                              onClick={() => {
+                                const body = document.getElementById("root");
+                                body.classList.remove("formShow");
+                              }}
+                            >
                               <Link
                                 onClick={handleLogout}
                                 className="header-user_list"
@@ -162,6 +183,7 @@ const Header = () => {
                         <Link
                           onClick={() => {
                             show ? <></> : setShowLogin(true);
+                            setMenu(false);
                             const body = document.getElementById("root");
                             body.classList.add("formShow");
                           }}
@@ -171,6 +193,7 @@ const Header = () => {
                         <Link
                           onClick={() => {
                             showLogin ? <> </> : setShow(true);
+                            setMenu(false);
                             const body = document.getElementById("root");
                             body.classList.add("formShow");
                           }}
@@ -184,7 +207,12 @@ const Header = () => {
                         <img src="/Images/heart.svg" alt="" /> Wishlist
                       </Link>
                     </li>
-                    <li>
+                    <li
+                      onClick={() => {
+                        const body = document.getElementById("root");
+                        body.classList.remove("formShow");
+                      }}
+                    >
                       <img src="/Images/bag.svg" alt="" />
                       <Link to={"/cart"}>Cart ( {cart?.length} )</Link>
                     </li>

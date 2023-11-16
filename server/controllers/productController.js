@@ -233,7 +233,6 @@ exports.getSingleProductController = async (req, res) => {
 };
 
 // Get Product Photo
-
 exports.getProductPhotoController = async (req, res) => {
   try {
     let product = await Product.findOne({ slug: req.params.slug }).select(
