@@ -17,11 +17,19 @@ import SearchPage from "./Pages/SearchPage";
 import Order from "./Pages/User/Order";
 import AdminOrder from "./Pages/Admin/AdminOrder";
 import UserProfile from "./Pages/User/Profile";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    fetch("https://YOUR_BACKEND_URL.com")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message));
+  }, []);
   return (
     <>
       <Routes>
+        <h1>{message}</h1>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:slug" element={<SingleShop />} />
