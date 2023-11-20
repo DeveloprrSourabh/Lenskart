@@ -5,7 +5,7 @@ const userRoute = require("./routes/userRoute");
 const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const connectToMongo = require("./config/db");
-
+const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 
@@ -17,8 +17,13 @@ app.use(
     extended: true,
   })
 );
+app.use(express.static(path.join(__dirname, "./client/build")));
 // Database connection
 connectToMongo();
+
+app.use("*", function (req, res) {
+  res.sendFile(path.join(__dirname,'./client/build/index.html'))
+});
 
 // User Route
 app.use("/api/v1/auth/", userRoute);
