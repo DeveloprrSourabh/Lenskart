@@ -6,7 +6,7 @@ const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const connectToMongo = require("./config/db");
 const path = require("path");
-const {fileURLToPath} require("url")
+const { fileURLToPath } = require("url");
 const bodyParser = require("body-parser");
 const app = express();
 
@@ -21,10 +21,10 @@ app.use(
 app.use(express.static(path.join(__dirname, "./client/build")));
 // Database connection
 connectToMongo();
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 app.use("*", function (req, res) {
-  res.sendFile(path.join(__dirname,'./client/build/index.html'))
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 // User Route
