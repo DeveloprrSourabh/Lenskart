@@ -6,7 +6,7 @@ const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const connectToMongo = require("./config/db");
 const path = require("path");
-const {fileURLToPath} from 'url
+const {fileURLToPath} require("url")
 const bodyParser = require("body-parser");
 const app = express();
 
