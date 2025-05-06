@@ -1,5 +1,6 @@
 {
   "name": "server",
+"homepage":"http://developrrsourabh.github.io/Lenskart",
   "version": "1.0.0",
   "description": "",
   "main": "Server.js",
